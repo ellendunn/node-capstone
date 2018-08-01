@@ -10,7 +10,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    // "start": "node server.js",
     "test": "mocha"
   },
   "author": "",
