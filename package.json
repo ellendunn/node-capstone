@@ -1,7 +1,7 @@
 {
   "name": "capstone",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
@@ -10,7 +10,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js",
+    // "start": "node server.js",
     "test": "mocha"
   },
   "author": "",

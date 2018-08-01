@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 if (require.main === module) {
 	app.listen(process.env.PORT || 8080, function() {
-	console.log(`App is listening on ${PORT}`);	
+	console.log(`App is listening on ${this.address().port}`);	
 	});
 }
 
