@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('index html page', function() {
+describe('index html & main css page', function() {
 
 	it('should exist', function() {
 		return chai 
