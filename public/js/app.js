@@ -44,7 +44,8 @@ function getCurrentApps(callback) {
 function displayCurrentApps(data) {
 	for (index in data.applications) {
 		$('body').append('<p>' + data.applications[index].role + 
-			' - ' + data.applications[index].company + '</p>');
+			' - ' + data.applications[index].company + '</p>' + '<p>' + 
+			data.applications[index].status + '</p><br>');
 	}
 }
 
@@ -52,7 +53,9 @@ function getAndDisplayCurrentApps() {
 	getCurrentApps(displayCurrentApps)
 }
 
-$(getAndDisplayCurrentApps())
+$(function() {
+	getAndDisplayCurrentApps()
+});
 
 
 
