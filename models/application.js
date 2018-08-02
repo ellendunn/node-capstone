@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 
 const applicationSchema = mongoose.Schema({
 	role:{type: String, required: true},
@@ -18,7 +18,7 @@ const applicationSchema = mongoose.Schema({
 	created: {type: Date}
 });
 
-applicationSchema.methods.serialize = function () {
+applicationSchema.methods.serialize = function() {
 	return {
 		id: this._id,
 		role: this.role,
