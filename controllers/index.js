@@ -2,7 +2,7 @@
 
 const { Application } = require('../models/application')
 
-exports.getAllApps = (req,res) => {
+exports.getAllApps = (req, res) => {
 	Application	
 		.find()
 		.then(applications => {
@@ -17,7 +17,7 @@ exports.getAllApps = (req,res) => {
 		})
 }
 
-exports.getApp = (req,res) => {
+exports.getApp = (req, res) => {
 	Application
 		.findById(req.params.id)
 		.then(application => res.json(application.serialize()))
@@ -27,7 +27,7 @@ exports.getApp = (req,res) => {
 		});
 }
 
-exports.postApp = (req,res) => {
+exports.postApp = (req, res) => {
 	const requiredFields = ['role', 'company', 'status', 'created'];
 	for (let i = 1; i < requiredFields; i++) {
 		const field = requiredFields[i];
@@ -47,7 +47,9 @@ exports.postApp = (req,res) => {
 			notes: req.body.notes,
 			created: req.body.created
 		})
-		.then(application => res.status(201).json(application.serialize()))
+		.then(application => {
+			res.status(201).json(application.serialize())
+		})
 		.catch(err => {
 			console.error(err);
 			res.status(500).json({message: 'Internal Server Error 3'})
