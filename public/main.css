@@ -1,4 +1,51 @@
 
+* {
+	box-sizing: border-box;
+}
+
 .nav-option {
 	display: inline-block;
+}
+
+.indiv-app{
+	margin: 10px;
+	padding: 10px;
+	border: 1px gray solid;
+	display: inline-block;
+	width: 30%;
+}
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) 
+and (max-device-width : 768px) {
+/* Styles */
+
+.col-4, .col-12 {
+	width: 100%;
+}
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and 
+(max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+
+.col-4 {
+	width: 33%;
+}
+
+}
+
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and 
+(max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+
+.col-4 {
+	width:; 100%
+}
+
 }

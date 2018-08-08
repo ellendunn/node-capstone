@@ -59,7 +59,7 @@ exports.postApp = (req, res) => {
 exports.updateApp = (req, res) => {
 		if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		const message = (`Request path id (${req.params.id}) must match id` +
-		 `in request body (${req.body.id})`);
+		 ` in request body (${req.body.id})`);
 		console.error(message);
 		return res.status(400).json({message})
 	}
@@ -74,7 +74,10 @@ exports.updateApp = (req, res) => {
 
 	Application
 		.findByIdAndUpdate(req.params.id, {$set: update})
-		.then(application => res.status(204).send({message: 'Application was udated'}).end())
+		.then(application => {
+			console.log(application, 'from controllers');
+			res.status(200).json(application);
+			}) //not updating right away?
 		.catch(err => res.status(500).json({message: 'Internal Server Error 4'}));
 }
 
@@ -85,6 +88,7 @@ exports.deleteApp = (req, res) => {
 		.catch(err => res.status(500).json({ message: 'Internal Server Error 5' }))
 
 }
+
 
 
 

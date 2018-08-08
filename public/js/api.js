@@ -6,6 +6,7 @@ const api = (() => {
 	const url = window.location.origin + '/applications'
 
 	const postApp = application =>
+	// console.log('api application data', application);
 		$.ajax({
 			type: 'POST',
 			url,
@@ -31,10 +32,31 @@ const api = (() => {
 		.then(res => res)
 	
 
+	const getApp = app_id => 
+		$.ajax({
+			type: 'GET',
+			url: url + `/${app_id}`,
+			dataType: 'json',
+			contentType: 'application/json'
+		})
+		.then(res => res)
+
+	const updateApp = (app_id, updated) => 
+		$.ajax({
+			type: 'PUT',
+			url: url + `/${app_id}`,
+			data: updated,
+			dataType: 'json',
+			contentType: 'application/json'
+		})
+		.then(res =>  res)
+	
 	return{
 		postApp,
 		getAllApps,
-		deleteApp
+		deleteApp,
+		getApp,
+		updateApp
 	}
 
 })()

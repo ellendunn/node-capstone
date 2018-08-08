@@ -3,8 +3,8 @@ const render =(() => {
 	const form = () => {
 		$('.collection').hide();
 
-		$('#app').html(`<form id='add-app' method='post'>
-		<h2>Add a New Application!</h2>
+		$('#app').html(`<form id='add-app' method='post' class='col-12'>
+		<h2>Add a New Application</h2>
 		<fieldset name='application'>
 			<legend>Application Info</legend>
 			<label for='role'>Role: </label>
@@ -43,36 +43,116 @@ const render =(() => {
 				<br>
 			</fieldset>
 			<label for='notes'>Notes: </label><br>
-			<textarea name='notes' rows='10' cols='30' placeholder='Need to follow up!'>
+			<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'>
 			</textarea>	
 			<br>
 			<input for='date' type='hidden' name='date' id='date' />
 				<script type='text/javascript'> document.getElementById('date').value=Date();
 				</script>
+			<button type='submit'>Add Application</button>
 		</fieldset>
-		<button type='submit'>Add Application</button>
 	</form>`
 	)}
 
 	const applications = () => {
 		//this will add the app to the DOM
-		$('.collection').show().html(store.applications.map(applications => {
+		$('#add-app').hide();
+		$('.update-app').hide();
 
-			$('#add-app').hide()
-			
-			return `<div class='indiv-app' id='${applications.id}'>
+		$('.collection').show().html(
+			`<h1>My Current Applications</h1>` +
+			store.applications.map(applications => {
+			// console.log(applications);
+			return `<div class='indiv-app col-4' id='${applications.id}'>
 								<h3>${applications.role}</h3>
 								<h4>${applications.company}</h4>
 								<p>${applications.status}</p>
 								<p>${applications.created}</p>
 								<button type='button' class='delete'>Delete App</button>
+								<button type='button' class='edit'>Edit App</button>
 							</div>`
-		}));
+		})
+			.join(""));
 	};
 
+	const updateAppForm = (application) => {
+		$('.collection').hide();
+
+		if (application.link === undefined) {
+			$('link').val('')
+		};
+		if (application.contacts.name === undefined) {
+			application.contacts.name = '';
+		};
+		if (application.contacts.title === undefined) {
+			application.contacts.title = '';
+		};
+		if (application.contacts.email === undefined) {
+			application.contacts.email = '';
+		};
+		if (application.contacts.phone === undefined) {
+			application.contacts.phone = '';
+		};
+
+		$('#status').val(application.status)
+
+		$('#app').html(`<form data-id='${application.id}' class='update-app' method='post'>
+		<h2>Update this Application</h2>
+		<fieldset name='application'>
+			<legend>Application Info</legend>
+			<label for='role'>Role: </label>
+			<input value='${application.role}' type='text' name='role' id='role' required/>
+			<br>
+			<label for='company'>Company: </label>
+			<input value='${application.company}' type='text' name='company' id='company' required/>
+			<br>
+			<label for='link'>Link to Job Posting: </label>
+			<input value='${application.link}' type='text' name='link' id='link' />
+			<br>
+			<label for='status'>Status: </label>
+			<select name='status' id='status'>
+				<option value='viewed-app'>Viewed Application</option>
+				<option value='applied'>Applied</option>
+				<option value='interview'>Interviewing</option>
+				<option value='follow-up'>Followed Up</option>
+				<option value='declined'>'We're going in a different direction'</option>
+				<option value='offer'>Got an Offer!</option>
+				<option value='accepted'>Turned Down Offer</option>
+			</select>
+			<br>
+			<fieldset name='contact'>
+				<legend>Contact: </legend>
+				<label for='name'>Name: </label>
+				<input value='${application.contacts.name}' type='text' name='name' id='name' />
+				<br>
+				<label for='title'>Title: </label>
+				<input value='${application.contacts.title}' type='text' name='title' id='title' />
+				<br>
+				<label for='email'>Email: </label>
+				<input value='${application.contacts.email}' type='email' name='email' id='email' />
+				<br>
+				<label for='phone'>Phone Number: </label>
+				<input value='${application.contacts.phone}' type='text' name='phone' id='phone' />
+				<br>
+			</fieldset>
+			<label for='notes'>Notes: </label><br>
+			<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'>
+			</textarea>	
+			<br>
+			<input for='date' type='hidden' name='date' id='date' />
+				<script type='text/javascript'> document.getElementById('date').value=Date();
+				</script>
+			<button class='save-update' type='button'>Update Application</button>
+
+		</fieldset>
+	</form>`
+		)
+	}
+
 	return {
+		form,
 		applications,
-		form
+		updateAppForm
 	}
 
 })()
