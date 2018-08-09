@@ -1,6 +1,8 @@
 'use strict'
 
-const { Application } = require('../models/application')
+const { Application } = require('../models/application');
+
+// const { Users } = require('../users/models');
 
 exports.getAllApps = (req, res) => {
 	Application	

@@ -8,5 +8,10 @@ const attachListeners = (() => () => {
 // NAV BAR LISTENERS
 	$('#current-apps').on('click', handlers.handleGetAllApps)
 	$('#add-new').on('click', handlers.handleForm)
+
+//LOGIN & REGISTER LISTENERS
+	$('#add-user')
+
+
 	}
 )()
