@@ -74,10 +74,7 @@ exports.updateApp = (req, res) => {
 
 	Application
 		.findByIdAndUpdate(req.params.id, {$set: update})
-		.then(application => {
-			console.log(application, 'from controllers');
-			res.status(200).json(application);
-			}) //not updating right away?
+		.then(application => res.status(200).json(application)) 
 		.catch(err => res.status(500).json({message: 'Internal Server Error 4'}));
 }
 

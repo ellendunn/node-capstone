@@ -102,12 +102,11 @@ const handlers= (() => {
 
 
 	return {
-		// handleAppSubmit,
+		handleAppSubmit,
 		handleAppDelete,
 		handleAppUpdate,
 		handleGetApp,
 		handleGetAllApps,
-		handleAppSubmit,
 		handleForm
 	}
 })()
