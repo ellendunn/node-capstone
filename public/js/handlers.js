@@ -1,9 +1,40 @@
 const handlers= (() => {
 
+//USER & AUTH HANDLERS
+	const handleSubmitNewUser = event => {
+		event.preventDefault();
+
+		let firstName = $('#firstName').val();
+		let lastName = $('#lastName').val();
+		let username = $('#username').val();
+		let password = $('#password').val();
+
+		const newUser = JSON.stringify({firstName, lastName, username, password})
+
+		api.postUser(newUser)
+			.then(user => store.addUserToStore(user))
+			console.log(store)
+	}
+
+	const handleUserLogin = event => {
+		event.preventDefault();
+		let username = $('#username').val();
+		let password = $('#password').val();
+
+		const userCred = JSON.stringify({username, password})
+
+		api.getUserJwt(userCred)
+			.then(token => {
+				api.getUser(token.authToken)
+			})
+			.then(render.applications())
+				// api.getUserApps(user))
+	}
+
+//APPLICATION HANDLERS
 	const handleAppSubmit = event => {
 		event.preventDefault();
 		// const appForm = $(event.currentTarget).find('#add-app');
-
 		let name = $('#name').val();
 		let title = $('#title').val();
 		let email = $('#email').val();
@@ -16,7 +47,7 @@ const handlers= (() => {
 		let contacts = {name, title, email, phone};
 		let notes = $('#notes').val();
 		let created = $('#date').val();
-				
+
 		// const newApp = JSON.stringify({
 		// 	role, company, link, status, contacts, notes, created
 		// })
@@ -28,11 +59,11 @@ const handlers= (() => {
 		console.log(newApp);
 
 		// appForm[0].reset();
-	
+
 		api.postApp(newApp)
 			.then(newApplication => {
 				console.log(newApplication)
-				store.addToStore(newApplication)
+				store.addAppToStore(newApplication)
 				render.applications()
 			})
 	}
@@ -40,7 +71,7 @@ const handlers= (() => {
 	const handleAppUpdate = event => {
 		event.preventDefault();
 		const id = $(event.currentTarget).closest('.update-app').data().id;
-		
+
 		let name = $('#name').val();
 		let title = $('#title').val();
 		let email = $('#email').val();
@@ -53,7 +84,7 @@ const handlers= (() => {
 		let contacts = {name, title, email, phone};
 		let notes = $('#notes').val();
 		let created = $('#date').val();
-				
+
 		const updatedApp = JSON.stringify({
 			id, role, company, link, status, contacts, notes, created
 		})
@@ -83,30 +114,26 @@ const handlers= (() => {
 
 		api.deleteApp(id)
 			.then(()=> {
-				store.deleteFromStore(id);
+				store.deleteAppFromStore(id);
 				render.applications()
 			})
 	}
 
 	const handleGetAllApps = event => {
-		api.getAllApps() 
+		api.getAllApps()
 			.then((applications) => {
 				store.loadAllApps(applications)
 				render.applications()
 			})
 	}
 
-	const handleForm = event => {
-		render.form()
-	}
-
-
 	return {
+		handleSubmitNewUser,
+		handleUserLogin,
 		handleAppSubmit,
 		handleAppDelete,
 		handleAppUpdate,
 		handleGetApp,
-		handleGetAllApps,
-		handleForm
+		handleGetAllApps
 	}
 })()

@@ -1,23 +1,13 @@
-'use strict';
+'use strict'
 
-const express = require('express')
-const bodyParser = require('body-parser');
+const { User } = require('../models/user');
 
-const { User } = require('./models');
-
-const router = express.Router()
-
-//returns middleware that only parses json and only looks at 
-//requests where Content Type header matches the type option
-const jsonParser = bodyParser.json(); 
-
-//Register a new user with POST
-
-router.post('/', jsonParser, (req,res) => {
+exports.postUser = (req, res) => {
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
 
 	if (missingField) {
+		console.log('here')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -28,10 +18,11 @@ router.post('/', jsonParser, (req,res) => {
 
 	const stringFields = ['username', 'password', 'firstName', 'lastName'];
 	const notStringFields = stringFields.find(field => {
-		return field in req.body && typeof req.body[field] !== String
+		return field in req.body && typeof req.body[field] !== 'string'
 	});
 
 	if (notStringFields) {
+		console.log('here 1')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -42,11 +33,12 @@ router.post('/', jsonParser, (req,res) => {
 
 	//Trimming the username and password from spaces
 	const trimmedFields = ['username', 'password'];
-	const nonTrimmedfield = trimmedField.find(
+	const nonTrimmedfield = trimmedFields.find(
 		field => req.body[field].trim() != req.body[field]
 		)
 
 	if(nonTrimmedfield) {
+		console.log('here 2')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -56,26 +48,22 @@ router.post('/', jsonParser, (req,res) => {
 	}
 
 	const sizedFields = {
-		username: {
-			min: 1
-		},
-		password: {
-			min: 8,
-			max: 72
-		}
+		username: {	min: 1 },
+		password: { min: 6, max: 72 }
 	};
 
-	const tooShortField = Object.keys(sizedFields).find((field) => 
+	const tooShortField = Object.keys(sizedFields).find((field) =>
 		'min' in sizedFields[field] &&
 					req.body[field].trim().length < sizedFields[field].min
 	);
 
 	const tooLongField = Object.keys(sizedFields).find((field) =>
 		'max' in sizedFields[field] &&
-					req.body[field].trim().length > sizeFields[field].max
+					req.body[field].trim().length > sizedFields[field].max
 	);
 
 	if (tooShortField || tooLongField) {
+		console.log('here')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -89,7 +77,6 @@ router.post('/', jsonParser, (req,res) => {
 	let {username, password, firstName = '', lastName = ''} = req.body;
 	firstName = firstName.trim();
 	lastName = lastName.trim();
-
 
 	return User.find({username})
 		.count()
@@ -106,7 +93,10 @@ router.post('/', jsonParser, (req,res) => {
 		})
 		.then(hash => {
 			return User.create({
-				username, password: hash, firstName, lastName
+				firstName,
+				lastName,
+				username,
+				password: hash
 			});
 		})
 		.then(user => {
@@ -118,32 +108,32 @@ router.post('/', jsonParser, (req,res) => {
 			}
 			res.status(500).json({code: 500, message: 'Internal Server Error'})
 		});
-});
+};
 
-// will need to remove
-router.get('/', (req, res) => {
-  return User.find()
-    .then(users => res.json(users.map(user => user.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
-});
+exports.getUser = (req, res) => {
+	User
+		.findById(req.params.id)
+		.then(user => {
+			console.log(user);
+			return res.status(201).json(user.serialize());
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: 'Internal server error 1'})
+		});
+}
 
-module.exports = {router};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+exports.getAllUsers = (req, res) => {
+  User
+    .find()
+    .then(users => {
+      res.json({
+        users: users.map(
+          (user) => user.serialize())
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error 2'})
+    })
+}

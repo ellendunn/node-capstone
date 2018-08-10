@@ -1,21 +1,27 @@
 const store = (() => {
-	let applications =[]
+	let applications = [];
+	let users = [];
 
-	function addToStore(newApp) {
+	function addUserToStore(newUser) {
+		users.push(newUser);
+		// console.log(`added user ${newUser.firstName} ${newUser.lastName} to the store`)
+	};
+
+	function addAppToStore(newApp) {
 		this.applications.push(newApp);
 		console.log(`added app to the store`)
-	}
+	};
 
 	function loadAllApps(appData) {
 		this.applications = appData.applications
-	}
+	};
 
-	function deleteFromStore(id) {
+	function deleteAppFromStore(id) {
 		this.applications = this.applications.filter(app => app.id != id)
 		console.log(`deleted app ${id}`)
-	}
+	};
 
-	function updateInStore(updatedApp) {
+	function updateAppInStore(updatedApp) {
 		this.applications = this.applications.map(application => {
 				if (application.id == updatedApp.id) {
 					Object.assign({}, application, updatedApp);
@@ -31,10 +37,11 @@ const store = (() => {
 
 
 	return {
-		addToStore,
+		addUserToStore,
+		addAppToStore,
 		loadAllApps,
-		deleteFromStore,
-		updateInStore,
+		deleteAppFromStore,
+		updateAppInStore,
 		applications
 	}
 })()

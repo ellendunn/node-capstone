@@ -1,6 +1,42 @@
 const render =(() => {
 
-	const form = () => {
+	const newUserForm = () => {
+		$('.nav-bar').hide()
+
+		$('#app').html(
+			`<form id='register' method='post' class='col-6'>
+				<fieldset>
+					<legend>New User Info:</legend>
+					<label for='firstName'>First Name: </label>
+					<input value='Ellen' name='firstName' id='firstName' type='text' placeholder='Jane'/><br>
+					<label for='lastName'>Last Name: </label>
+					<input value='Dunn' name='lastName' id='lastName' type='text' placeholder='Doe'/><br>
+					<label for='username'>Username: </label>
+					<input value='ellendunn' name='username' id='username' type='text' placeholder='janedoe'/><br>
+					<label for='password'>Password: </label>
+					<input value='password' name='password' id='password' type='text' placeholder='password123' /><br>
+					<button type='submit'>Register</button> <br>
+					<button type='button' id='take-to-login'>Already have an account?</button>
+				</fieldset>
+		</form>`)
+	}
+
+	const loginForm = () => {
+		$('#app').html(
+			`<form id='login' method='get' class='col-6'>
+				<fieldset>
+					<legend>User Info:</legend>
+					<label for='username'>Username: </label>
+					<input value='ellendunn' name='username' id='username' type='text' placeholder='janedoe'/><br>
+					<label for='password'>Password: </label>
+					<input value='password' name='password' id='password' type='text' placeholder='password123' /><br>
+					<button type='submit'>Sign In</button>
+				</fieldset>
+			</form>`
+		)
+	}
+
+	const newAppForm = () => {
 		$('.collection').hide();
 
 		$('#app').html(`<form id='add-app' method='post' class='col-12'>
@@ -17,7 +53,7 @@ const render =(() => {
 			<input placeholder='www.joburl.com' type='text' name='link' id='link' />
 			<br>
 			<label for='status'>Status: </label>
-			<select name='status' id='status'>
+			<select name='status' class='status'>
 				<option value='viewed-app'>Viewed Application</option>
 				<option value='applied' selected>Applied</option>
 				<option value='interview'>Interviewing</option>
@@ -44,7 +80,7 @@ const render =(() => {
 			</fieldset>
 			<label for='notes'>Notes: </label><br>
 			<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'>
-			</textarea>	
+			</textarea>
 			<br>
 			<input for='date' type='hidden' name='date' id='date' />
 				<script type='text/javascript'> document.getElementById('date').value=Date();
@@ -94,7 +130,7 @@ const render =(() => {
 			application.contacts.phone = '';
 		};
 
-		$('#status').val(application.status)
+		$('.status').val(application.status)
 
 		$('#app').html(`<form data-id='${application.id}' class='update-app' method='post'>
 		<h2>Update this Application</h2>
@@ -110,7 +146,7 @@ const render =(() => {
 			<input value='${application.link}' type='text' name='link' id='link' />
 			<br>
 			<label for='status'>Status: </label>
-			<select name='status' id='status'>
+			<select name='status' class='status'>
 				<option value='viewed-app'>Viewed Application</option>
 				<option value='applied'>Applied</option>
 				<option value='interview'>Interviewing</option>
@@ -137,7 +173,7 @@ const render =(() => {
 			</fieldset>
 			<label for='notes'>Notes: </label><br>
 			<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'>
-			</textarea>	
+			</textarea>
 			<br>
 			<input for='date' type='hidden' name='date' id='date' />
 				<script type='text/javascript'> document.getElementById('date').value=Date();
@@ -146,13 +182,16 @@ const render =(() => {
 
 		</fieldset>
 	</form>`
-		)
-	}
+	);
+}
+
 
 	return {
-		form,
+		newAppForm,
 		applications,
-		updateAppForm
+		updateAppForm,
+		newUserForm,
+		loginForm
 	}
 
 })()

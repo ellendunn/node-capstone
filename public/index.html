@@ -9,51 +9,19 @@
 <body>
 	<nav role='navigation' class='nav-bar'>
 		<ul>
-			<button class='nav-option' type='button' id='add-new'>
-				Add New
-			</button>
-			<button class='nav-option' type='button' id='current-apps'>
-				Current Applications
-			</button>
-		<!-- 	<button class='nav-option' type='button' id='current-jobs'>
-				Current Jobs
-			</button>		 -->	
+			<button class='nav-option' type='button' id='add-new'>Add New</button>
+			<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+		<!-- 	<button class='nav-option' type='button' id='current-jobs'>Current Jobs</button>		 -->
 		</ul>
 	</nav>
+
 	<div id='app'></div>
 
-	<div id='user-auth'>
-		<form id='register'>
-			<fieldset>
-				<legend>New User Info:</legend>
-				<label for='firstName'>First Name: </label>
-				<input name='firstName' id='firstName' type='text' placeholder='Jane'/><br>
-				<label for='lastName'>Last Name: </label>
-				<input name='lastName' id='lastName' type='text' placeholder='Doe'/><br>
-				<label for='username'>Username: </label>
-				<input name='username' id='username' type='text' placeholder='janedoe'/><br>
-				<label for='password'>Password: </label>
-				<input name='password' id='password' type='text' placeholder='password123' /><br>
-				<button type='submit' id='add-user'>Register</button> <br>
-				<button type='button' id='take-to-login'>Already have an account?</button>
-			</fieldset>
-		</form>
-
-		<form id='login'>
-			<fieldset>
-				<legend>User Info:</legend>
-				<label for='username'>Username: </label>
-				<input name='username' id='username' type='text' placeholder='janedoe'/><br>
-				<label for='password'>Password: </label>
-				<input name='password' id='password' type='text' placeholder='password123' /><br>
-				<button type='submit' id='login'>Sign In</button>
-			</fieldset>
-		</form>
-	</div>
+	<!-- <div id='user-auth'></div> -->
 
 	<div class='collection'></div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/api.js"></script>
 	<script type="text/javascript" src="js/handlers.js"></script>
 	<script type="text/javascript" src="js/listeners.js"></script>

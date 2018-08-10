@@ -2,10 +2,9 @@
 
 const { Application } = require('../models/application');
 
-// const { Users } = require('../users/models');
 
 exports.getAllApps = (req, res) => {
-	Application	
+	Application
 		.find()
 		.then(applications => {
 			res.json({
@@ -76,7 +75,7 @@ exports.updateApp = (req, res) => {
 
 	Application
 		.findByIdAndUpdate(req.params.id, {$set: update})
-		.then(application => res.status(200).json(application)) 
+		.then(application => res.status(200).json(application))
 		.catch(err => res.status(500).json({message: 'Internal Server Error 4'}));
 }
 
@@ -87,8 +86,3 @@ exports.deleteApp = (req, res) => {
 		.catch(err => res.status(500).json({ message: 'Internal Server Error 5' }))
 
 }
-
-
-
-
-
