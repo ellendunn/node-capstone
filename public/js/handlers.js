@@ -12,8 +12,10 @@ const handlers= (() => {
 		const newUser = JSON.stringify({firstName, lastName, username, password})
 
 		api.postUser(newUser)
-			.then(user => store.addUserToStore(user))
-			console.log(store)
+			.then(user => {
+				store.addUserToStore(user);
+				handleGetAllApps() //will need to be based on the user's ID?
+			})
 	}
 
 	const handleUserLogin = event => {
@@ -27,7 +29,8 @@ const handlers= (() => {
 			.then(token => {
 				api.getUser(token.authToken)
 			})
-			.then(render.applications())
+			.then(handleGetAllApps())
+				// render.applications())
 				// api.getUserApps(user))
 	}
 
@@ -44,6 +47,9 @@ const handlers= (() => {
 		let company = $('#company').val();
 		let link = $('#link').val();
 		let status = $('#status').val();
+		// let i = document.getElementById('status').selectedIndex;
+		// let status = document.getElementById('status').options[i].val;
+
 		let contacts = {name, title, email, phone};
 		let notes = $('#notes').val();
 		let created = $('#date').val();
@@ -56,13 +62,11 @@ const handlers= (() => {
 			role, company, link, status, contacts, notes, created
 		});
 
-		console.log(newApp);
 
 		// appForm[0].reset();
 
 		api.postApp(newApp)
 			.then(newApplication => {
-				console.log(newApplication)
 				store.addAppToStore(newApplication)
 				render.applications()
 			})
@@ -81,6 +85,7 @@ const handlers= (() => {
 		let company = $('#company').val();
 		let link = $('#link').val();
 		let status = $('#status').val();
+
 		let contacts = {name, title, email, phone};
 		let notes = $('#notes').val();
 		let created = $('#date').val();
@@ -99,6 +104,7 @@ const handlers= (() => {
 	}
 
 	const handleGetApp = event => {
+		console.log('handle get app');
 		const selected = $(event.currentTarget).closest('.indiv-app');
 		const id = selected[0].id;
 

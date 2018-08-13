@@ -10,8 +10,8 @@ const attachListeners = () => {
 	$('#add-new').on('click', render.newAppForm)
 
 //LOGIN & REGISTER LISTENERS
-	$('#app').on('submit', '#register', handlers.handleSubmitNewUser)
-	$('#app').on('click', '#take-to-login', render.loginForm)
-	$('#app').on('submit', '#login', handlers.handleUserLogin)
+	$('#user-auth').on('submit', '#register', handlers.handleSubmitNewUser)
+	$('#user-auth').on('click', '#take-to-login', render.loginForm)
+	$('#user-auth').on('submit', '#login', handlers.handleUserLogin)
 
 }

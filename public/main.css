@@ -16,8 +16,32 @@
 }
 
 
+.viewed-app {
+	border: 2px yellow solid
+}
+.applied {
+	border: 2px orange solid
+}
+.interview {
+	border: 2px blue solid
+}
+.follow-up {
+	border: 2px purple solid
+}
+.rejected {
+	border: 2px red solid
+}
+.offer {
+	border: 2px green solid
+}
+.declined-offer {
+	border: 2px red solid
+}
+
+
+
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) 
+@media only screen and (min-device-width : 320px)
 and (max-device-width : 768px) {
 /* Styles */
 
@@ -28,7 +52,7 @@ and (max-device-width : 768px) {
 }
 
 /* iPads (landscape) ----------- */
-@media only screen and (min-device-width : 768px) and 
+@media only screen and (min-device-width : 768px) and
 (max-device-width : 1024px) and (orientation : landscape) {
 /* Styles */
 
@@ -40,7 +64,7 @@ and (max-device-width : 768px) {
 
 
 /* iPads (portrait) ----------- */
-@media only screen and (min-device-width : 768px) and 
+@media only screen and (min-device-width : 768px) and
 (max-device-width : 1024px) and (orientation : portrait) {
 /* Styles */
 

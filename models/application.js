@@ -20,7 +20,7 @@ const applicationSchema = mongoose.Schema({
 
 applicationSchema.methods.serialize = function() {
 	return {
-		id: this._id,
+		id: this.id,
 		role: this.role,
 		company: this.company,
 		link: this.link,
@@ -33,4 +33,4 @@ applicationSchema.methods.serialize = function() {
 
 const Application = mongoose.model('Application', applicationSchema);
 
-module.exports = { Application } 
+module.exports = { Application }

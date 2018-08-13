@@ -58,10 +58,10 @@ const api = (() => {
 		})
 		.then(res => res)
 
-	// const getAllApps = () => {
-	// 	return $.getJSON(url + '/applications/')
-	// 	.then(res => res)
-	// }
+	const getAllApps = () => { //do I use this or getUserApps??
+		return $.getJSON(url + '/applications')
+		.then(res => res)
+	}
 
 	const deleteApp = app_id =>
 		// swal('Are you sure you want to delete this application?')
@@ -73,22 +73,25 @@ const api = (() => {
 		})
 		.then(res => res)
 
-	const getApp = app_id =>
-		$.ajax({
+	const getApp = app_id =>{
+		console.log(app_id)
+		return $.ajax({
 			type: 'GET',
-			url: url + `applications/${app_id}`,
+			url: url + `/applications/${app_id}`,
 			dataType: 'json',
 			contentType: 'application/json'
 		})
 		.then(res => res)
+	}
 
 	const updateApp = (app_id, updated) =>
 		$.ajax({
 			type: 'PUT',
-			url: url + `applications/${app_id}`,
+			url: url + `/applications/${app_id}`,
 			data: updated,
 			dataType: 'json',
 			contentType: 'application/json'
+
 		})
 		.then(res =>  res)
 
@@ -99,7 +102,7 @@ const api = (() => {
 		getUserApps,
 		getAllUsers,
 		postApp,
-		// getAllApps,
+		getAllApps,
 		deleteApp,
 		getApp,
 		updateApp

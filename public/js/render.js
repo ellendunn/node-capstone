@@ -3,7 +3,7 @@ const render =(() => {
 	const newUserForm = () => {
 		$('.nav-bar').hide()
 
-		$('#app').html(
+		$('#user-auth').html(
 			`<form id='register' method='post' class='col-6'>
 				<fieldset>
 					<legend>New User Info:</legend>
@@ -22,7 +22,7 @@ const render =(() => {
 	}
 
 	const loginForm = () => {
-		$('#app').html(
+		$('#user-auth').html(
 			`<form id='login' method='get' class='col-6'>
 				<fieldset>
 					<legend>User Info:</legend>
@@ -39,7 +39,7 @@ const render =(() => {
 	const newAppForm = () => {
 		$('.collection').hide();
 
-		$('#app').html(`<form id='add-app' method='post' class='col-12'>
+		$('#app').show().html(`<form id='add-app' method='post' class='col-12'>
 		<h2>Add a New Application</h2>
 		<fieldset name='application'>
 			<legend>Application Info</legend>
@@ -53,14 +53,14 @@ const render =(() => {
 			<input placeholder='www.joburl.com' type='text' name='link' id='link' />
 			<br>
 			<label for='status'>Status: </label>
-			<select name='status' class='status'>
+			<select name='status' id='status'>
 				<option value='viewed-app'>Viewed Application</option>
 				<option value='applied' selected>Applied</option>
 				<option value='interview'>Interviewing</option>
 				<option value='follow-up'>Followed Up</option>
-				<option value='declined'>'We're going in a different direction'</option>
+				<option value='rejected'>Rejected</option>
 				<option value='offer'>Got an Offer!</option>
-				<option value='accepted'>Turned Down Offer</option>
+				<option value='declined-offer'>Declined Offer</option>
 			</select>
 			<br>
 			<fieldset name='contact'>
@@ -91,19 +91,44 @@ const render =(() => {
 	)}
 
 	const applications = () => {
-		//this will add the app to the DOM
-		$('#add-app').hide();
-		$('.update-app').hide();
+		$('#app').hide();
+		$('#user-auth').hide();
 
+		function setStatus(app) {
+			if (app.status === 'viewed-app') {
+				return 'Viewed Application'
+			}
+			if (app.status === 'applied') {
+				return 'Applied'
+			}
+			if (app.status === 'interview') {
+				return 'Interviewing'
+			}
+			if (app.status === 'follow-up') {
+				return 'Followed Up'
+			}
+			if (app.status === 'rejected') {
+				return 'Rejected'
+			}
+			if (app.status === 'offer') {
+				return 'Got an Offer!'
+			}
+			if (app.status === 'declined-offer') {
+				return 'Declined Offer'
+			}
+		}
+
+		$('.nav-bar').show();
 		$('.collection').show().html(
+
 			`<h1>My Current Applications</h1>` +
 			store.applications.map(applications => {
-			// console.log(applications);
-			return `<div class='indiv-app col-4' id='${applications.id}'>
+
+			return `<div class='indiv-app col-4 ${applications.status}' id='${applications.id}'>
 								<h3>${applications.role}</h3>
 								<h4>${applications.company}</h4>
-								<p>${applications.status}</p>
-								<p>${applications.created}</p>
+								<p>${setStatus(applications)}</p>
+								<p>Application created on  ${applications.created}</p>
 								<button type='button' class='delete'>Delete App</button>
 								<button type='button' class='edit'>Edit App</button>
 							</div>`
@@ -130,9 +155,7 @@ const render =(() => {
 			application.contacts.phone = '';
 		};
 
-		$('.status').val(application.status)
-
-		$('#app').html(`<form data-id='${application.id}' class='update-app' method='post'>
+		$('#app').show().html(`<form data-id='${application.id}' class='update-app' method='post'>
 		<h2>Update this Application</h2>
 		<fieldset name='application'>
 			<legend>Application Info</legend>
@@ -146,14 +169,14 @@ const render =(() => {
 			<input value='${application.link}' type='text' name='link' id='link' />
 			<br>
 			<label for='status'>Status: </label>
-			<select name='status' class='status'>
+			<select name='status' id='status'>
 				<option value='viewed-app'>Viewed Application</option>
 				<option value='applied'>Applied</option>
 				<option value='interview'>Interviewing</option>
 				<option value='follow-up'>Followed Up</option>
-				<option value='declined'>'We're going in a different direction'</option>
+				<option value='rejected'>Rejected</option>
 				<option value='offer'>Got an Offer!</option>
-				<option value='accepted'>Turned Down Offer</option>
+				<option value='declined-offer'>Declined Offer</option>
 			</select>
 			<br>
 			<fieldset name='contact'>
@@ -183,6 +206,32 @@ const render =(() => {
 		</fieldset>
 	</form>`
 	);
+
+	$(document).ready(function getStatus() {
+		console.log(application.status);
+		if (application.status === 'viewed-app') {
+			$('#status').val('viewed-app')
+		}
+		if (application.status === 'applied') {
+			$('#status').val('applied')
+		}
+		if (application.status === 'interview') {
+			$('#status').val('interview')
+		}
+		if (application.status === 'follow-up') {
+			$('#status').val('follow-up')
+		}
+		if (application.status === 'rejected') {
+			$('#status').val('rejected')
+		}
+		if (application.status === 'offer') {
+			$('#status').val('offer')
+		}
+		if (application.status === 'declined-offer') {
+			$('#status').val('declined-offer')
+		}
+	})
+
 }
 
 

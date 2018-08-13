@@ -4,7 +4,7 @@ const store = (() => {
 
 	function addUserToStore(newUser) {
 		users.push(newUser);
-		// console.log(`added user ${newUser.firstName} ${newUser.lastName} to the store`)
+		console.log(`added user ${newUser.firstName} ${newUser.lastName} to the store`)
 	};
 
 	function addAppToStore(newApp) {
@@ -42,6 +42,7 @@ const store = (() => {
 		loadAllApps,
 		deleteAppFromStore,
 		updateAppInStore,
-		applications
+		applications,
+		users
 	}
 })()
