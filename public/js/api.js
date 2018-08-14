@@ -28,7 +28,41 @@ const api = (() => {
 		$.ajax({
 			type: 'GET',
 			url: url + '/protected',
-			data: token,
+			dataType: 'json',
+			contentType: 'application/json',
+			headers: {
+				Authorization: `Bearer ${token}`
+			 }
+		})
+		.then(res => console.log(res))
+
+	const getAllUsers = () => {
+		return $.getJSON(url + '/users')
+		.then(res => res)
+	}
+
+	const postApp = application => {
+		const token = localStorage.getItem('token');
+
+		return	$.ajax({
+			type: 'POST',
+			url: url + '/applications',
+			data: application,
+			dataType: 'json',
+			contentType:  'application/json',
+			headers: {
+				Authorization: `Bearer ${token}`
+			 }
+		})
+		.then(res => res)
+	}
+
+	const getAllApps = () => {
+		const token = localStorage.getItem('token')
+
+		return $.ajax({
+			type: 'GET',
+			url: url + '/applications',
 			dataType: 'json',
 			contentType: 'application/json',
 			headers: {
@@ -36,70 +70,60 @@ const api = (() => {
 			 }
 		})
 		.then(res => res)
-
-	const getAllUsers = () => {
-		return $.getJSON(url + '/users')
-		.then(res => console.log(res))
 	}
 
-	const getUserApps = (user) =>
-		$.getJSON(url + `/applications/${user.id}`)
-		.then(res => res)
-
-
-	const postApp = application =>
-	// console.log('api application data', application);
-		$.ajax({
-			type: 'POST',
-			url: url + '/applications',
-			data: application,
-			dataType: 'json',
-			contentType:  'application/json'
-		})
-		.then(res => res)
-
-	const getAllApps = () => { //do I use this or getUserApps??
-		return $.getJSON(url + '/applications')
-		.then(res => res)
-	}
-
-	const deleteApp = app_id =>
+	const deleteApp = app_id => {
 		// swal('Are you sure you want to delete this application?')
-		$.ajax({
+		const token = localStorage.getItem('token')
+
+		return $.ajax({
 			type: 'DELETE',
 			url: url + `/applications/${app_id}`,
 			dataType: 'json',
-			contentType:  'application/json'
+			contentType:  'application/json',
+			headers: {
+				Authorization: `Bearer ${token}`
+			 }
 		})
 		.then(res => res)
+	}
 
 	const getApp = app_id =>{
-		console.log(app_id)
+		const token = localStorage.getItem('token')
+
 		return $.ajax({
 			type: 'GET',
 			url: url + `/applications/${app_id}`,
 			dataType: 'json',
-			contentType: 'application/json'
+			contentType: 'application/json',
+			headers: {
+				Authorization: `Bearer ${token}`
+			 }
 		})
 		.then(res => res)
 	}
 
-	const updateApp = (app_id, updated) =>
-		$.ajax({
+	const updateApp = (app_id, updated) => {
+		const token = localStorage.getItem('token')
+
+		return $.ajax({
 			type: 'PUT',
 			url: url + `/applications/${app_id}`,
 			data: updated,
 			dataType: 'json',
-			contentType: 'application/json'
+			contentType: 'application/json',
+			headers: {
+				Authorization: `Bearer ${token}`
+			 }
 
 		})
 		.then(res =>  res)
+	}
 
 	return{
 		postUser,
 		getUserJwt,
 		getUser,
-		getUserApps,
 		getAllUsers,
 		postApp,
 		getAllApps,

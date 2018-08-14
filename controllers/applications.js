@@ -1,11 +1,11 @@
 'use strict'
 
 const { Application } = require('../models/application');
-
+const { User } = require('../models/user')
 
 exports.getAllApps = (req, res) => {
 	Application
-		.find()
+		.find({user: req.user.id})
 		.then(applications => {
 			res.json({
 				applications: applications.map(
@@ -18,6 +18,7 @@ exports.getAllApps = (req, res) => {
 		})
 }
 
+
 exports.getApp = (req, res) => {
 	Application
 		.findById(req.params.id)
@@ -29,7 +30,7 @@ exports.getApp = (req, res) => {
 }
 
 exports.postApp = (req, res) => {
-	const requiredFields = ['role', 'company', 'status', 'created'];
+	const requiredFields = ['role', 'company', 'status', 'created', 'user'];
 	for (let i = 1; i < requiredFields; i++) {
 		const field = requiredFields[i];
 		if(!(field in req.body)) {
@@ -38,23 +39,32 @@ exports.postApp = (req, res) => {
 			return res.status(400).send(message)
 		}
 	}
-	Application
-		.create({
-			role: req.body.role,
-			company: req.body.company,
-			link: req.body.link,
-			status: req.body.status,
-			contacts: req.body.contacts,
-			notes: req.body.notes,
-			created: req.body.created
-		})
-		.then(application => {
-			res.status(201).json(application.serialize())
-		})
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({message: 'Internal Server Error 3'})
-		});
+	User
+		.findById(req.user.id)
+		.then(user => {
+			if (user) {
+				Application.create({
+						role: req.body.role,
+						company: req.body.company,
+						link: req.body.link,
+						status: req.body.status,
+						contacts: req.body.contacts,
+						notes: req.body.notes,
+						created: req.body.created,
+						user: req.user.id
+					})
+					.then(application => {
+						return Application.findById(application._id)
+					})
+					.then(application => {
+						res.status(201).json(application.serialize())
+					})
+					.catch(err => {
+						console.error(err);
+						res.status(500).json({message: 'Internal Server Error 3'})
+					})
+				}
+			});
 }
 
 exports.updateApp = (req, res) => {

@@ -1,6 +1,6 @@
 $(() => {
 	// render.form()
-	render.newUserForm()
+	// render.newUserForm()
 	attachListeners()
 
 	// api.getAllUsers()

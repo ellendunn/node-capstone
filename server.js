@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 // const morgan = require('morgan');
 const passport = require('passport');
 
+
 const { router: usersRouter } = require('./routes/users-router');
 const { router: authRouter } = require('./routes/auth-router');
 const { router: appRouter } = require('./routes/app-router');
@@ -35,11 +36,11 @@ app.use(function(req, res, next) {
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/applications', appRouter);
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+app.use('/applications', jwtAuth, appRouter);
 app.use('/users', usersRouter);//now do I need to add /api before endpoints?
 app.use('/auth', authRouter);
-
-const jwtAuth = passport.authenticate('jwt', {session: false});
 
 //given the JWT, user access /protected endpoint to get their data
 app.get('/protected', jwtAuth, (req,res) => {

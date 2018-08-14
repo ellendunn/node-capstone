@@ -14,20 +14,32 @@ const applicationSchema = mongoose.Schema({
 		email: {type: String},
 		phone: {type: String}
 	},
-	notes: {type: String},
-	created: {type: Date}
+	notes: {type: String, default: ''},
+	created: {type: Date},
+	user: { type: mongoose.Schema.Types.ObjectId, ref: "User"}
+});
+
+applicationSchema.pre("find", function(next) {
+  this.populate("user");
+  next()
+});
+
+applicationSchema.pre("findOne", function(next) {
+  this.populate("user");
+  next()
 });
 
 applicationSchema.methods.serialize = function() {
 	return {
-		id: this.id,
+		id: this._id,
 		role: this.role,
 		company: this.company,
 		link: this.link,
 		status: this.status,
 		contacts: this.contacts,
 		notes: this.notes,
-		created: this.created
+		created: this.created,
+		user: this.user
 	};
 };
 

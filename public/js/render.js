@@ -1,9 +1,8 @@
 const render =(() => {
 
 	const newUserForm = () => {
-		$('.nav-bar').hide()
 
-		$('#user-auth').html(
+		$('#app').html(
 			`<form id='register' method='post' class='col-6'>
 				<fieldset>
 					<legend>New User Info:</legend>
@@ -22,7 +21,7 @@ const render =(() => {
 	}
 
 	const loginForm = () => {
-		$('#user-auth').html(
+		$('#app').html(
 			`<form id='login' method='get' class='col-6'>
 				<fieldset>
 					<legend>User Info:</legend>
@@ -37,9 +36,8 @@ const render =(() => {
 	}
 
 	const newAppForm = () => {
-		$('.collection').hide();
 
-		$('#app').show().html(`<form id='add-app' method='post' class='col-12'>
+		$('#app').html(`<form id='add-app' method='post' class='col-12'>
 		<h2>Add a New Application</h2>
 		<fieldset name='application'>
 			<legend>Application Info</legend>
@@ -91,53 +89,55 @@ const render =(() => {
 	)}
 
 	const applications = () => {
-		$('#app').hide();
-		$('#user-auth').hide();
 
-		function setStatus(app) {
-			if (app.status === 'viewed-app') {
-				return 'Viewed Application'
-			}
-			if (app.status === 'applied') {
-				return 'Applied'
-			}
-			if (app.status === 'interview') {
-				return 'Interviewing'
-			}
-			if (app.status === 'follow-up') {
-				return 'Followed Up'
-			}
-			if (app.status === 'rejected') {
-				return 'Rejected'
-			}
-			if (app.status === 'offer') {
-				return 'Got an Offer!'
-			}
-			if (app.status === 'declined-offer') {
-				return 'Declined Offer'
-			}
+		// let apps = store.applications;
+		// if (store.filter) {
+		// 	apps = apps.filter(app => app.status = store.filter)
+		// }
+
+
+		const statusObj = {
+			'viewed-app': 'Viewed Application',
+			'applied': 'Applied',
+			'interview': 'Interviewing',
+			'follow-up': 'Followed Up',
+			'rejected': 'Rejected',
+			'offer': 'Got an Offer!',
+			'declined-offer': 'Declined Offer'
 		}
 
-		$('.nav-bar').show();
-		$('.collection').show().html(
+		$('#app').html(
+			`<h1>My Current Applications</h1>
+			<label for='statusFilter'>Filter by Status: </label>
+				<select name='statusFilter' id='statusFilter'>
+					<option value= null> - Choose a status - </option>
+					<option value='viewed-app'>Viewed Application</option>
+					<option value='applied'>Applied</option>
+					<option value='interview'>Interviewing</option>
+					<option value='follow-up'>Followed Up</option>
+					<option value='rejected'>Rejected</option>
+					<option value='offer'>Got an Offer!</option>
+					<option value='declined-offer'>Declined Offer</option>
+				</select><br>` +
 
-			`<h1>My Current Applications</h1>` +
 			store.applications.map(applications => {
 
+			const created = applications.created
+			const date = created.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1')
+
 			return `<div class='indiv-app col-4 ${applications.status}' id='${applications.id}'>
-								<h3>${applications.role}</h3>
-								<h4>${applications.company}</h4>
-								<p>${setStatus(applications)}</p>
-								<p>Application created on  ${applications.created}</p>
-								<button type='button' class='delete'>Delete App</button>
+								<h3>${applications.role} at ${applications.company}</h3>
+								<p>${statusObj[applications.status]}</p>
+								<p>Notes: ${applications.notes}
+								<p>Created on ${date}</p>
 								<button type='button' class='edit'>Edit App</button>
+								<button type='button' class='delete'>Delete App</button>
 							</div>`
 		})
 			.join(""));
 	};
 
 	const updateAppForm = (application) => {
-		$('.collection').hide();
 
 		if (application.link === undefined) {
 			$('link').val('')
@@ -155,7 +155,7 @@ const render =(() => {
 			application.contacts.phone = '';
 		};
 
-		$('#app').show().html(`<form data-id='${application.id}' class='update-app' method='post'>
+		$('#app').html(`<form data-id='${application.id}' class='update-app' method='post'>
 		<h2>Update this Application</h2>
 		<fieldset name='application'>
 			<legend>Application Info</legend>
@@ -208,28 +208,7 @@ const render =(() => {
 	);
 
 	$(document).ready(function getStatus() {
-		console.log(application.status);
-		if (application.status === 'viewed-app') {
-			$('#status').val('viewed-app')
-		}
-		if (application.status === 'applied') {
-			$('#status').val('applied')
-		}
-		if (application.status === 'interview') {
-			$('#status').val('interview')
-		}
-		if (application.status === 'follow-up') {
-			$('#status').val('follow-up')
-		}
-		if (application.status === 'rejected') {
-			$('#status').val('rejected')
-		}
-		if (application.status === 'offer') {
-			$('#status').val('offer')
-		}
-		if (application.status === 'declined-offer') {
-			$('#status').val('declined-offer')
-		}
+		$('#status').val(application.status)
 	})
 
 }

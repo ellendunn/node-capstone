@@ -1,10 +1,23 @@
 
 * {
 	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+.nav-bar{
+	/* position: fixed; */
+	width: 100%;
+	border: 1px black solid;
+	display: inline-block;
+	padding: 10px;
+}
+
+#logout{
+	float: right
 }
 
 .nav-option {
-	display: inline-block;
+	/* display: inline-flex; */
 }
 
 .indiv-app{
@@ -13,6 +26,8 @@
 	border: 1px gray solid;
 	display: inline-block;
 	width: 30%;
+	height: 300px;
+	vertical-align: middle
 }
 
 
@@ -47,6 +62,7 @@ and (max-device-width : 768px) {
 
 .col-4, .col-12 {
 	width: 100%;
+	height: auto
 }
 
 }
@@ -69,7 +85,9 @@ and (max-device-width : 768px) {
 /* Styles */
 
 .col-4 {
-	width:; 100%
+	width: 100%;
+	height: auto
+
 }
 
 }

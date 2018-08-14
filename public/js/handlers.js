@@ -20,6 +20,7 @@ const handlers= (() => {
 
 	const handleUserLogin = event => {
 		event.preventDefault();
+
 		let username = $('#username').val();
 		let password = $('#password').val();
 
@@ -27,17 +28,17 @@ const handlers= (() => {
 
 		api.getUserJwt(userCred)
 			.then(token => {
-				api.getUser(token.authToken)
+				localStorage.setItem('token', token.authToken);
+				api.getUser(token.authToken);
+				handleGetAllApps()
 			})
-			.then(handleGetAllApps())
-				// render.applications())
-				// api.getUserApps(user))
 	}
+
 
 //APPLICATION HANDLERS
 	const handleAppSubmit = event => {
 		event.preventDefault();
-		// const appForm = $(event.currentTarget).find('#add-app');
+
 		let name = $('#name').val();
 		let title = $('#title').val();
 		let email = $('#email').val();
@@ -47,23 +48,14 @@ const handlers= (() => {
 		let company = $('#company').val();
 		let link = $('#link').val();
 		let status = $('#status').val();
-		// let i = document.getElementById('status').selectedIndex;
-		// let status = document.getElementById('status').options[i].val;
-
 		let contacts = {name, title, email, phone};
 		let notes = $('#notes').val();
 		let created = $('#date').val();
 
-		// const newApp = JSON.stringify({
-		// 	role, company, link, status, contacts, notes, created
-		// })
-
 		const newApp = JSON.stringify({
 			role, company, link, status, contacts, notes, created
 		});
-
-
-		// appForm[0].reset();
+		console.log(newApp)
 
 		api.postApp(newApp)
 			.then(newApplication => {
@@ -94,17 +86,13 @@ const handlers= (() => {
 			id, role, company, link, status, contacts, notes, created
 		})
 
-		console.log(updatedApp)
-
 		api.updateApp(id, updatedApp)
 			.then((updated) => {
 				handleGetAllApps();
-				console.log(store)
 			})
 	}
 
 	const handleGetApp = event => {
-		console.log('handle get app');
 		const selected = $(event.currentTarget).closest('.indiv-app');
 		const id = selected[0].id;
 
@@ -133,6 +121,16 @@ const handlers= (() => {
 			})
 	}
 
+	const handleLogOut = event => {
+		localStorage.removeItem('token');
+		render.newUserForm();
+	}
+
+	const handleFilter = event => {
+		store.filter = $('#statusFilter').val();
+		render.applications()
+	}
+
 	return {
 		handleSubmitNewUser,
 		handleUserLogin,
@@ -140,6 +138,8 @@ const handlers= (() => {
 		handleAppDelete,
 		handleAppUpdate,
 		handleGetApp,
-		handleGetAllApps
+		handleGetAllApps,
+		handleLogOut,
+		handleFilter
 	}
 })()

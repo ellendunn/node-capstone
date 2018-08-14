@@ -6,30 +6,25 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const userSchema = mongoose.Schema({
-	firstName: {type: String, default: ''},
-	lastName: {type: String, default: ''},
+	firstName: {type: 'string', default: ''},
+	lastName: {type: 'string', default: ''},
 	username: {
-		type: String,
+		type: 'string',
 		required: true,
 		unique: true,
 	},
 	password: {
-		type: String,
+		type: 'string',
 		required: true
 	}
 });
 
-// userSchema.virtual('name').get(function() {
-//   return `${this.name.firstName} ${this.name.lastName}`.trim();
-// });
-
 userSchema.methods.serialize = function() {
 	return{
-		id: this.id,
-		username: this.username || '',
+		id: this._id,
 		firstName: this.firstName || '',
 		lastName: this.lastName || '',
-		password: this.password
+		username: this.username || '',
 	};
 };
 

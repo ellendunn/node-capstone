@@ -32,9 +32,9 @@ const store = (() => {
 					console.log(application, 'application')
 				}
 			});
-
 	}
 
+	let filter
 
 	return {
 		addUserToStore,
@@ -43,6 +43,7 @@ const store = (() => {
 		deleteAppFromStore,
 		updateAppInStore,
 		applications,
-		users
+		users,
+		filter
 	}
 })()
