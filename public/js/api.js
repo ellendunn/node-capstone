@@ -3,7 +3,6 @@
 const api = (() => {
 
 	const url = window.location.origin ;
-	const key = 'AIzaSyC5P9hIVyDKn1KP71Ns9c6Teng6-7lVbGY';
 	// const GOOGLE_JOBS_URL = 'https://www.googleapis.com/auth/jobs?key='+ key ;
 
 	const GOOGLE_JOBS_URL = 'https://jobs.googleapis.com/v2/jobs?key=' + key;
