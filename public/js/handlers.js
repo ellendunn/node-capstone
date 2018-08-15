@@ -1,5 +1,11 @@
 const handlers= (() => {
 
+	const handleGoogleApi = event => {
+
+		api.getGoogleJobs()
+		// render.openings()
+	}
+
 //USER & AUTH HANDLERS
 	const handleSubmitNewUser = event => {
 		event.preventDefault();
@@ -115,8 +121,8 @@ const handlers= (() => {
 
 	const handleGetAllApps = event => {
 		api.getAllApps()
-			.then((applications) => {
-				store.loadAllApps(applications)
+			.then((apps) => {
+				store.loadAllApps(apps)
 				render.applications()
 			})
 	}
@@ -132,6 +138,7 @@ const handlers= (() => {
 	}
 
 	return {
+		handleGoogleApi,
 		handleSubmitNewUser,
 		handleUserLogin,
 		handleAppSubmit,

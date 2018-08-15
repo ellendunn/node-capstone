@@ -2,6 +2,7 @@
 * {
 	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
+	/* border: 1px grey solid */
 }
 
 .nav-bar{
@@ -16,8 +17,17 @@
 	float: right
 }
 
+#register, #login{
+	padding: 10px;
+	display: inline-flex;
+	margin-left: auto;
+	margin-top: auto;
+}
+
 .nav-option {
 	/* display: inline-flex; */
+	padding: 5px;
+	background-color: light-green;
 }
 
 .indiv-app{
@@ -30,6 +40,11 @@
 	vertical-align: middle
 }
 
+.no-apps {
+	border: 1px black solid;
+	padding: 10px;
+	align-content: center
+}
 
 .viewed-app {
 	border: 2px yellow solid
@@ -52,7 +67,6 @@
 .declined-offer {
 	border: 2px red solid
 }
-
 
 
 /* Smartphones (portrait and landscape) ----------- */

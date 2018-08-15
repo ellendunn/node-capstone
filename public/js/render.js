@@ -37,80 +37,121 @@ const render =(() => {
 
 	const newAppForm = () => {
 
-		$('#app').html(`<form id='add-app' method='post' class='col-12'>
-		<h2>Add a New Application</h2>
-		<fieldset name='application'>
-			<legend>Application Info</legend>
-			<label for='role'>Role: </label>
-			<input value='Engineer in Test' placeholder='Junior Developer' type='text' name='role' id='role' required/>
-			<br>
-			<label for='company'>Company: </label>
-			<input value='Apple' placeholder='The Example Biz' type='text' name='company' id='company' required/>
-			<br>
-			<label for='link'>Link to Job Posting: </label>
-			<input placeholder='www.joburl.com' type='text' name='link' id='link' />
-			<br>
-			<label for='status'>Status: </label>
-			<select name='status' id='status'>
-				<option value='viewed-app'>Viewed Application</option>
-				<option value='applied' selected>Applied</option>
-				<option value='interview'>Interviewing</option>
-				<option value='follow-up'>Followed Up</option>
-				<option value='rejected'>Rejected</option>
-				<option value='offer'>Got an Offer!</option>
-				<option value='declined-offer'>Declined Offer</option>
-			</select>
-			<br>
-			<fieldset name='contact'>
-				<legend>Contact: </legend>
-				<label for='name'>Name: </label>
-				<input placeholder="Sarah Smith" type='text' name='name' id='name' />
+		$('#app').html(`
+			<nav role='navigation' class='nav-bar'>
+				<ul>
+					<button class='nav-option' type='button' id='add-new'>Add New</button>
+					<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+					<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+					<button class='nav-option' type='button' id='logout'>Log Out</button>
+				</ul>
+			</nav>
+		<form id='add-app' method='post' class='col-12'>
+			<h2>Add a New Application</h2>
+			<fieldset name='application'>
+				<legend>Application Info</legend>
+				<label for='role'>Role: </label>
+				<input value='Engineer in Test' placeholder='Junior Developer' type='text' name='role' id='role' required/>
 				<br>
-				<label for='title'>Title: </label>
-				<input placeholder="Project Manager" type='text' name='title' id='title' />
+				<label for='company'>Company: </label>
+				<input value='Apple' placeholder='The Example Biz' type='text' name='company' id='company' required/>
 				<br>
-				<label for='email'>Email: </label>
-				<input placeholder="sarah.smith@job.com" type='email' name='email' id='email' />
+				<label for='link'>Link to Job Posting: </label>
+				<input placeholder='www.joburl.com' type='text' name='link' id='link' />
 				<br>
-				<label for='phone'>Phone Number: </label>
-				<input placeholder="555-555-1234" type='text' name='phone' id='phone' />
+				<label for='status'>Status: </label>
+				<select name='status' id='status'>
+					<option value='viewed-app'>Viewed Application</option>
+					<option value='applied' selected>Applied</option>
+					<option value='interview'>Interviewing</option>
+					<option value='follow-up'>Followed Up</option>
+					<option value='rejected'>Rejected</option>
+					<option value='offer'>Got an Offer!</option>
+					<option value='declined-offer'>Declined Offer</option>
+				</select>
 				<br>
+				<fieldset name='contact'>
+					<legend>Contact: </legend>
+					<label for='name'>Name: </label>
+					<input placeholder="Sarah Smith" type='text' name='name' id='name' />
+					<br>
+					<label for='title'>Title: </label>
+					<input placeholder="Project Manager" type='text' name='title' id='title' />
+					<br>
+					<label for='email'>Email: </label>
+					<input placeholder="sarah.smith@job.com" type='email' name='email' id='email' />
+					<br>
+					<label for='phone'>Phone Number: </label>
+					<input placeholder="555-555-1234" type='text' name='phone' id='phone' />
+					<br>
+				</fieldset>
+				<label for='notes'>Notes: </label><br>
+				<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'>
+				</textarea>
+				<br>
+				<input for='date' type='hidden' name='date' id='date' />
+					<script type='text/javascript'> document.getElementById('date').value=Date();
+					</script>
+				<button type='submit'>Add Application</button>
 			</fieldset>
-			<label for='notes'>Notes: </label><br>
-			<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'>
-			</textarea>
-			<br>
-			<input for='date' type='hidden' name='date' id='date' />
-				<script type='text/javascript'> document.getElementById('date').value=Date();
-				</script>
-			<button type='submit'>Add Application</button>
-		</fieldset>
-	</form>`
+		</form>`
 	)}
+
 
 	const applications = () => {
 
-		// let apps = store.applications;
-		// if (store.filter) {
-		// 	apps = apps.filter(app => app.status = store.filter)
-		// }
+		if (store.applications.length < 1) {
+			$('#app').html(`
+				<nav role='navigation' class='nav-bar'>
+					<ul>
+						<button class='nav-option' type='button' id='add-new'>Add New</button>
+						<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+						<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+						<button class='nav-option' type='button' id='logout'>Log Out</button>
+					</ul>
+				</nav>
+				<h1>My Current Applications</h1>
+					<label for='statusFilter'>Filter by Status: </label>
+						<select name='statusFilter' id='statusFilter'>
+							<option value='all'>Show All</option>
+							<option value='viewed-app'>Viewed Application</option>
+							<option value='applied'>Applied</option>
+							<option value='interview'>Interviewing</option>
+							<option value='follow-up'>Followed Up</option>
+							<option value='rejected'>Rejected</option>
+							<option value='offer'>Got an Offer!</option>
+							<option value='declined-offer'>Declined Offer</option>
+						</select><br>
+					<div class='no-apps'>
+						<h2>You have no applications yet!</h2>
+						<button class='nav-option' type='button' id='add-new'>Add Your First App</button>
+					</div>
+				`)
+		} else {
 
+			let applications = store.applications
 
-		const statusObj = {
-			'viewed-app': 'Viewed Application',
-			'applied': 'Applied',
-			'interview': 'Interviewing',
-			'follow-up': 'Followed Up',
-			'rejected': 'Rejected',
-			'offer': 'Got an Offer!',
-			'declined-offer': 'Declined Offer'
-		}
+			if (store.filter) {
+				applications = applications.filter(app => {
+					return app.status == store.filter
+				})
+			}
 
-		$('#app').html(
-			`<h1>My Current Applications</h1>
+			console.log(applications)
+
+		$('#app').html(`
+			<nav role='navigation' class='nav-bar'>
+				<ul>
+					<button class='nav-option' type='button' id='add-new'>Add New</button>
+					<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+					<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+					<button class='nav-option' type='button' id='logout'>Log Out</button>
+				</ul>
+			</nav>
+			<h1>My Current Applications</h1>
 			<label for='statusFilter'>Filter by Status: </label>
 				<select name='statusFilter' id='statusFilter'>
-					<option value= null> - Choose a status - </option>
+					<option value=''>Show All</option>
 					<option value='viewed-app'>Viewed Application</option>
 					<option value='applied'>Applied</option>
 					<option value='interview'>Interviewing</option>
@@ -120,22 +161,49 @@ const render =(() => {
 					<option value='declined-offer'>Declined Offer</option>
 				</select><br>` +
 
-			store.applications.map(applications => {
+			applications.map(apps => {
 
-			const created = applications.created
+			const created = apps.created
 			const date = created.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1')
+			const statusObj = {
+				'viewed-app': 'Viewed Application',
+				'applied': 'Applied',
+				'interview': 'Interviewing',
+				'follow-up': 'Followed Up',
+				'rejected': 'Rejected',
+				'offer': 'Got an Offer!',
+				'declined-offer': 'Declined Offer'
+			}
 
-			return `<div class='indiv-app col-4 ${applications.status}' id='${applications.id}'>
-								<h3>${applications.role} at ${applications.company}</h3>
-								<p>${statusObj[applications.status]}</p>
-								<p>Notes: ${applications.notes}
+			return `<div class='indiv-app col-4 ${apps.status}' id='${apps.id}'>
+								<h3>${apps.role} at ${apps.company}</h3>
+								<p>${statusObj[apps.status]}</p>
+								<p>Notes: ${apps.notes}
 								<p>Created on ${date}</p>
 								<button type='button' class='edit'>Edit App</button>
 								<button type='button' class='delete'>Delete App</button>
 							</div>`
-		})
+						})
 			.join(""));
+
+			if (applications.length < 1) {
+				$('#app').append(`
+					<div class='no-apps'>
+						<h2>You have no applications with that status</h2>
+					</div>
+					`)
+			}
+
+			$(document).ready(function getStatus() {
+				if (store.filter){
+					$('#statusFilter').val(store.filter)
+				} else {
+					$('#statusFilter').val('')
+				}
+			})
+		}
 	};
+
 
 	const updateAppForm = (application) => {
 
@@ -155,56 +223,64 @@ const render =(() => {
 			application.contacts.phone = '';
 		};
 
-		$('#app').html(`<form data-id='${application.id}' class='update-app' method='post'>
-		<h2>Update this Application</h2>
-		<fieldset name='application'>
-			<legend>Application Info</legend>
-			<label for='role'>Role: </label>
-			<input value='${application.role}' type='text' name='role' id='role' required/>
-			<br>
-			<label for='company'>Company: </label>
-			<input value='${application.company}' type='text' name='company' id='company' required/>
-			<br>
-			<label for='link'>Link to Job Posting: </label>
-			<input value='${application.link}' type='text' name='link' id='link' />
-			<br>
-			<label for='status'>Status: </label>
-			<select name='status' id='status'>
-				<option value='viewed-app'>Viewed Application</option>
-				<option value='applied'>Applied</option>
-				<option value='interview'>Interviewing</option>
-				<option value='follow-up'>Followed Up</option>
-				<option value='rejected'>Rejected</option>
-				<option value='offer'>Got an Offer!</option>
-				<option value='declined-offer'>Declined Offer</option>
-			</select>
-			<br>
-			<fieldset name='contact'>
-				<legend>Contact: </legend>
-				<label for='name'>Name: </label>
-				<input value='${application.contacts.name}' type='text' name='name' id='name' />
-				<br>
-				<label for='title'>Title: </label>
-				<input value='${application.contacts.title}' type='text' name='title' id='title' />
-				<br>
-				<label for='email'>Email: </label>
-				<input value='${application.contacts.email}' type='email' name='email' id='email' />
-				<br>
-				<label for='phone'>Phone Number: </label>
-				<input value='${application.contacts.phone}' type='text' name='phone' id='phone' />
-				<br>
-			</fieldset>
-			<label for='notes'>Notes: </label><br>
-			<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'>
-			</textarea>
-			<br>
-			<input for='date' type='hidden' name='date' id='date' />
-				<script type='text/javascript'> document.getElementById('date').value=Date();
-				</script>
-			<button class='save-update' type='button'>Update Application</button>
-
-		</fieldset>
-	</form>`
+		$('#app').html(`
+			<nav role='navigation' class='nav-bar'>
+				<ul>
+					<button class='nav-option' type='button' id='add-new'>Add New</button>
+					<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+					<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+					<button class='nav-option' type='button' id='logout'>Log Out</button>
+				</ul>
+			</nav>
+			<form data-id='${application.id}' class='update-app' method='post'>
+				<h2>Update this Application</h2>
+				<fieldset name='application'>
+					<legend>Application Info</legend>
+					<label for='role'>Role: </label>
+					<input value='${application.role}' type='text' name='role' id='role' required/>
+					<br>
+					<label for='company'>Company: </label>
+					<input value='${application.company}' type='text' name='company' id='company' required/>
+					<br>
+					<label for='link'>Link to Job Posting: </label>
+					<input value='${application.link}' type='text' name='link' id='link' />
+					<br>
+					<label for='status'>Status: </label>
+					<select name='status' id='status'>
+						<option value='viewed-app'>Viewed Application</option>
+						<option value='applied'>Applied</option>
+						<option value='interview'>Interviewing</option>
+						<option value='follow-up'>Followed Up</option>
+						<option value='rejected'>Rejected</option>
+						<option value='offer'>Got an Offer!</option>
+						<option value='declined-offer'>Declined Offer</option>
+					</select>
+					<br>
+					<fieldset name='contact'>
+						<legend>Contact: </legend>
+						<label for='name'>Name: </label>
+						<input value='${application.contacts.name}' type='text' name='name' id='name' />
+						<br>
+						<label for='title'>Title: </label>
+						<input value='${application.contacts.title}' type='text' name='title' id='title' />
+						<br>
+						<label for='email'>Email: </label>
+						<input value='${application.contacts.email}' type='email' name='email' id='email' />
+						<br>
+						<label for='phone'>Phone Number: </label>
+						<input value='${application.contacts.phone}' type='text' name='phone' id='phone' />
+						<br>
+					</fieldset>
+					<label for='notes'>Notes: </label><br>
+					<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'>
+					</textarea>
+					<br>
+					<input for='date' type='hidden' name='date' id='date' />
+						<script type='text/javascript'> document.getElementById('date').value=Date();
+						</script>
+					<button class='save-update' type='button'>Update Application</button>
+				</fieldset>
+			</form>`
 	);
 
 	$(document).ready(function getStatus() {

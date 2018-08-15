@@ -1,14 +1,12 @@
 $(() => {
-	// render.form()
-	// render.newUserForm()
+
+	handlers.handleLogOut()
 	attachListeners()
 
-	// api.getAllUsers()
-
 	//this will have to happen once the user is authenticated:
-	api.getAllApps()
-		.then(applications => {
-			store.loadAllApps(applications);
-			render.applications();
-		})
+	// api.getAllApps()
+	// 	.then(applications => {
+	// 		store.loadAllApps(applications);
+	// 		render.applications();
+		// })
 })
