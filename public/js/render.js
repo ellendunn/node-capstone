@@ -100,9 +100,53 @@ const render =(() => {
 					</script>
 				<button type='submit'>Add Application</button>
 			</fieldset>
-		</form>`
-	)}
+		</form>`)
+	}
 
+	// 	+
+	//
+	// 		applications.map(apps => {
+	//
+	// 		const created = apps.created
+	// 		const date = created.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1')
+	// 		const statusObj = {
+	// 			'viewed-app': 'Viewed Application',
+	// 			'applied': 'Applied',
+	// 			'interview': 'Interviewing',
+	// 			'follow-up': 'Followed Up',
+	// 			'rejected': 'Rejected',
+	// 			'offer': 'Got an Offer!',
+	// 			'declined-offer': 'Declined Offer'
+	// 		}
+	//
+	// 		return `<div class='indiv-app col-4 ${apps.status}' id='${apps.id}'>
+	// 							<h3>${apps.role} at ${apps.company}</h3>
+	// 							<p>${statusObj[apps.status]}</p>
+	// 							<p>Notes: ${apps.notes}
+	// 							<p>Created on ${date}</p>
+	// 							<button type='button' class='edit'>Edit App</button>
+	// 							<button type='button' class='delete'>Delete App</button>
+	// 						</div>`
+	// 					})
+	// 		.join(""));
+	//
+	// 		if (applications.length < 1) {
+	// 			$('#app').append(`
+	// 				<div class='no-apps'>
+	// 					<h2>You have no applications with that status</h2>
+	// 				</div>
+	// 				`)
+	// 		}
+	//
+	// 		$(document).ready(function getStatus() {
+	// 			if (store.filter){
+	// 				$('#statusFilter').val(store.filter)
+	// 			} else {
+	// 				$('#statusFilter').val('')
+	// 			}
+	// 		})
+	// 	}
+	// };
 
 
 	const updateAppForm = (application) => {
@@ -180,8 +224,7 @@ const render =(() => {
 						</script>
 					<button class='save-update' type='button'>Update Application</button>
 				</fieldset>
-			</form>
-			</div>`
+			</form>`
 	);
 
 	$(document).ready(function getStatus() {

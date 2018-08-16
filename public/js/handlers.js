@@ -84,7 +84,7 @@ const handlers= (() => {
 
 	const handleAppUpdate = event => {
 		event.preventDefault();
-		const id = $(event.currentTarget).closest('.update-app').data().id;
+		const id = $(event.currentTarget).closest('#update-app').data().id;
 
 		let name = $('#name').val();
 		let title = $('#title').val();
@@ -156,7 +156,7 @@ const handlers= (() => {
 
 	const handleJobsApi = event => {
 
-		api.getUserLocation(id)
+		// api.getUserLocation(id)
 
 		api.getNewJobs('chicago')
 			.then(jobs => render.openings(jobs))
