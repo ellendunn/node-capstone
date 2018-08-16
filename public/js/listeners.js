@@ -6,15 +6,18 @@ const attachListeners = () => {
 	$('#app').on('click', '.save-update', handlers.handleAppUpdate)
 
 // NAV BAR LISTENERS
-	$('#current-apps').on('click', handlers.handleGetAllApps)
-	$('#add-new').on('click', render.newAppForm)
-	$('#logout').on('click', handlers.handleLogOut)
+	$('#app').on('click', '#current-apps', handlers.handleGetAllApps)
+	$('#app').on('click', '#add-new', render.newAppForm)
+	$('#app').on('click', '#logout', handlers.handleLogOut)
 	$('#app').on('change', '#statusFilter', handlers.handleFilter)
+	$('#app').on('click', '#current-jobs', handlers.handleJobsApi)
 
 
 //LOGIN & REGISTER LISTENERS
-	$('#app').on('submit', '#register', handlers.handleSubmitNewUser)
+	$('#app').on('submit', '#register-form', handlers.handleSubmitNewUser)
 	$('#app').on('click', '#take-to-login', render.loginForm)
-	$('#app').on('submit', '#login', handlers.handleUserLogin)
+	$('#app').on('submit', '#login-form', handlers.handleUserLogin)
 
+
+	$('#app').on('click', '.app-link', handlers.handleAddAppFromApi)
 }

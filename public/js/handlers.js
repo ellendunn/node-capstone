@@ -1,20 +1,30 @@
 const handlers= (() => {
 
+	const handleErrors = message => {
+		swal({
+			title: message,
+			icon: 'warning'
+		})
+	}
+
 //USER & AUTH HANDLERS
 	const handleSubmitNewUser = event => {
 		event.preventDefault();
 
 		let firstName = $('#firstName').val();
 		let lastName = $('#lastName').val();
+		let location = $('#location').val()
 		let username = $('#username').val();
 		let password = $('#password').val();
 
-		const newUser = JSON.stringify({firstName, lastName, username, password})
+		const newUser = JSON.stringify({firstName, lastName, location, username, password})
+
+		localStorage.setItem('location', location)
 
 		api.postUser(newUser)
 			.then(user => {
 				store.addUserToStore(user);
-				handleGetAllApps() //will need to be based on the user's ID?
+				render.loginForm()
 			})
 	}
 
@@ -33,6 +43,11 @@ const handlers= (() => {
 				handleGetAllApps()
 			})
 	}
+
+	const handleLogOut = event => {
+		localStorage.removeItem('token');
+		render.newUserForm();
+		}
 
 
 //APPLICATION HANDLERS
@@ -55,10 +70,13 @@ const handlers= (() => {
 		const newApp = JSON.stringify({
 			role, company, link, status, contacts, notes, created
 		});
-		console.log(newApp)
 
 		api.postApp(newApp)
 			.then(newApplication => {
+				swal({
+					title: 'New Application Added!',
+					icon: 'success'
+				})
 				store.addAppToStore(newApplication)
 				render.applications()
 			})
@@ -106,24 +124,29 @@ const handlers= (() => {
 		const selected = $(event.currentTarget).closest('.indiv-app');
 		const id = selected[0].id;
 
-		api.deleteApp(id)
-			.then(()=> {
-				store.deleteAppFromStore(id);
-				render.applications()
-			})
+		swal({
+			title: 'Are you sure you want to delete this application?',
+			icon: 'warning',
+			buttons: true,
+  		dangerMode: true
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				api.deleteApp(id)
+					.then(()=> {
+						store.deleteAppFromStore(id);
+						render.applications()
+					})
+			}
+		})
 	}
 
 	const handleGetAllApps = event => {
 		api.getAllApps()
-			.then((applications) => {
-				store.loadAllApps(applications)
+			.then((apps) => {
+				store.loadAllApps(apps)
 				render.applications()
 			})
-	}
-
-	const handleLogOut = event => {
-		localStorage.removeItem('token');
-		render.newUserForm();
 	}
 
 	const handleFilter = event => {
@@ -131,7 +154,22 @@ const handlers= (() => {
 		render.applications()
 	}
 
+	const handleJobsApi = event => {
+
+		api.getUserLocation(id)
+
+		api.getNewJobs('chicago')
+			.then(jobs => render.openings(jobs))
+	}
+
+	const handleAddAppFromApi = event => {
+		const selected = $(event.currentTarget).closest('.indiv-job');
+		const id = selected[0].id
+		console.log(id)
+	}
+
 	return {
+		handleJobsApi,
 		handleSubmitNewUser,
 		handleUserLogin,
 		handleAppSubmit,
@@ -140,6 +178,8 @@ const handlers= (() => {
 		handleGetApp,
 		handleGetAllApps,
 		handleLogOut,
-		handleFilter
+		handleFilter,
+		handleAddAppFromApi,
+		handleErrors
 	}
 })()

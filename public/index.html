@@ -5,26 +5,25 @@
 	<meta charset = 'UTF-8'>
 	<title>Trackter - Track Ag Job Applications</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel='stylesheet' href='main.css'>
 </head>
 <body>
-	<nav role='navigation' class='nav-bar'>
+	<!-- <nav role='navigation' class='nav-bar'>
 		<ul>
 			<button class='nav-option' type='button' id='add-new'>Add New</button>
 			<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
 			<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
 			<button class='nav-option' type='button' id='logout'>Log Out</button>
 		</ul>
-	</nav>
+	</nav> -->
 
-<!-- USER REGISTRATION AND LOG IN FORM CONTAINER -->
-	<div id='user-auth'></div>
 
 <!-- CREATION AND EDITING OF APPLICATIONS -->
 	<div id='app'></div>
 
-<!-- DISPLAY OF APPLICATIONS FOR USER -->
-	<div class='collection'></div>
+	<div id = 'container'></div>
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="js/api.js"></script>

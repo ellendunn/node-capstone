@@ -1,7 +1,12 @@
 
 * {
-	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+	/* border: 1px grey solid */
+}
+
+body{
+	/* background: lightgreen; */
 }
 
 .nav-bar{
@@ -12,12 +17,113 @@
 	padding: 10px;
 }
 
+.nav-option {
+	float: left;
+	margin: 5px
+}
+
 #logout{
 	float: right
 }
 
+#app {
+	/* border: 1px black solid; */
+	text-align: center;
+}
+
+.user-auth {
+	border: 1px black solid;
+	/* padding: 20px; */
+	margin: 40px;
+	width: 75%;
+	display: inline-block;
+}
+
+fieldset {
+	padding: 10;
+  border: 0;
+  margin: 0;
+}
+
+legend {
+	font-size: 24px;
+	padding: 10px
+}
+
+#register-form, #login-form {
+	background: white;
+	text-align: center;
+	display: inline-block;
+	/* padding: 20px; */
+	margin-left: auto;
+	margin-top: auto;
+}
+
+input[type='text'], input[type='password'], input[type='email'] {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-size: 12px;
+  text-align: left;
+  padding: 10px;
+  border: 2px solid #e7e7e7;
+  border-radius: 2px;
+  background: #fcfcfc;
+  /* margin: 10px auto 10px; */
+  transition: opacity 0.4s;
+}
+
+button[type='submit'] button[type='button'] {
+	text-align: center;
+	padding: 5px;
+	width: 100%;
+	margin-bottom: 0px;
+	-webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+button:hover {
+	background-color: #298eea;
+	color: white
+}
+
+#update-app, #add-app {
+	border: 1px black solid;
+	display: inline-block;
+	text-align: center;
+	width: 75%;
+}
+
+#notes{
+	width: 100%;
+}
+
+#app-fieldset, #contact-fieldset {
+	float: left;
+	display: block;
+  width: 100%;
+  height: auto;
+  font-size: 12px;
+  text-align: left;
+  padding: 5px;
+  border: 2px solid #e7e7e7;
+  border-radius: 2px;
+  background: #fcfcfc;
+}
+
 .nav-option {
 	/* display: inline-flex; */
+	padding: 5px;
+}
+
+.indiv-job{
+	text-align: left;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px gray solid;
+	display: inline-block;
+	height: auto;
+	vertical-align: left
 }
 
 .indiv-app{
@@ -30,6 +136,11 @@
 	vertical-align: middle
 }
 
+.no-apps {
+	border: 1px black solid;
+	padding: 10px;
+	align-content: center
+}
 
 .viewed-app {
 	border: 2px yellow solid
@@ -53,14 +164,20 @@
 	border: 2px red solid
 }
 
+.col-6 {
+	width: 50%
+}
 
+.col-12 {
+	width: 100%
+}
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px)
 and (max-device-width : 768px) {
 /* Styles */
 
-.col-4, .col-12 {
+.col-4, .col-6, .col-12 {
 	width: 100%;
 	height: auto
 }
@@ -75,6 +192,9 @@ and (max-device-width : 768px) {
 .col-4 {
 	width: 33%;
 }
+.col-6 {
+	width: 50%
+}
 
 }
 
@@ -84,7 +204,7 @@ and (max-device-width : 768px) {
 (max-device-width : 1024px) and (orientation : portrait) {
 /* Styles */
 
-.col-4 {
+.col-4, .col-6, .col-12 {
 	width: 100%;
 	height: auto
 

@@ -1,18 +1,51 @@
-// import swal from 'sweetalert';
+
 
 const api = (() => {
 
 	const url = window.location.origin ;
 
+	const JOBS_SEARCH_URL = 'https://jobs.github.com/positions.json'
+
+	const getUserLocation = id =>
+		$.ajax({
+			type: 'GET',
+			url: url + `users/${id}/location`,
+			dataType: 'json',
+			contentType: 'application/json',
+			headers: {
+				Authorization: `Bearer ${token}`
+			 }
+		})
+		.then(res => console.log(res))
+
+
+	const getNewJobs = (query, endpoint) =>
+		$.ajax({
+			type: 'GET',
+			url: JOBS_SEARCH_URL,
+			data: {
+				location: query,
+				per_page: 10,
+			},
+			dataType: 'jsonp',
+			contentType: 'application/json'
+			})
+			.then(res => res)
+
 	const postUser = user =>
-		 $.ajax({
+		$.ajax({
 			type: 'POST',
 			url: url + '/users',
 			data: user,
 			dataType: 'json',
 			contentType: 'application/json'
 		})
-		.then(res => res)
+		.done(res => res)
+		.fail(function(error) {
+			let errMsg = error.responseJSON.message;
+			handlers.handleErrors(errMsg)
+		})
+
 
 	const getUserJwt = userCred =>
 		$.ajax({
@@ -20,7 +53,7 @@ const api = (() => {
 			url: url + '/auth/login',
 			data: userCred,
 			dataType: 'json',
-			contentType: 'application/json'
+			contentType: 'application/json',
 		})
 		.then(res => res)
 
@@ -73,7 +106,6 @@ const api = (() => {
 	}
 
 	const deleteApp = app_id => {
-		// swal('Are you sure you want to delete this application?')
 		const token = localStorage.getItem('token')
 
 		return $.ajax({
@@ -129,7 +161,8 @@ const api = (() => {
 		getAllApps,
 		deleteApp,
 		getApp,
-		updateApp
-	}
+		updateApp,
+		getNewJobs
+		}
 
 })()

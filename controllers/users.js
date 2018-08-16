@@ -1,5 +1,7 @@
 'use strict'
 
+const express = require('express');
+
 const { User } = require('../models/user');
 
 exports.postUser = (req, res) => {
@@ -68,15 +70,16 @@ exports.postUser = (req, res) => {
 			code: 422,
 			reason: 'ValidationError',
 			message: tooShortField
-				? `Must be at least ${sizedFields[tooShortField].min} characters long`
-				: `Cannot exceed ${sizedFields[tooLongField].max} characters`,
+				? `Password must be at least ${sizedFields[tooShortField].min} characters long`
+				: `Password cannot exceed ${sizedFields[tooLongField].max} characters`,
 			location: tooShortField || tooLongField
 		});
 	}
 
-	let {username, password, firstName = '', lastName = ''} = req.body;
+	let {username, password, location='', firstName = '', lastName = ''} = req.body;
 	firstName = firstName.trim();
 	lastName = lastName.trim();
+	location = location.trim();
 
 	return User.find({username})
 		.count()
@@ -85,7 +88,7 @@ exports.postUser = (req, res) => {
 				return Promise.reject({
 				code: 422,
 				reason: 'ValidationError',
-				message: 'Username already taken',
+				message: 'Username is already taken',
 				location: 'username'
 				});
 			}
@@ -95,17 +98,19 @@ exports.postUser = (req, res) => {
 			return User.create({
 				firstName,
 				lastName,
+				location,
 				username,
 				password: hash
 			});
 		})
 		.then(user => {
+			console.log(user)
 			return res.status(201).json(user.serialize());
 		})
 		.catch(err => {
 			if (err.reason = 'ValidationError') {
 				return res.status(err.code).json(err);
-			}
+			}t
 			res.status(500).json({code: 500, message: 'Internal Server Error'})
 		});
 };
@@ -121,6 +126,20 @@ exports.getUser = (req, res) => {
 			console.error(err);
 			res.status(500).json({message: 'Internal server error 1'})
 		});
+}
+
+exports.getUserLocation = (req, res) => {
+	User
+		.findById(req.params.id)
+		.then(user => {
+			console.log(user.location);
+			return res.status(201).json(user.serialize());
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: 'Internal server error 1'})
+		});
+
 }
 
 exports.getAllUsers = (req, res) => {

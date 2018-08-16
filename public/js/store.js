@@ -34,8 +34,8 @@ const store = (() => {
 			});
 	}
 
-	let filter
-
+	let filter = ''
+//
 	return {
 		addUserToStore,
 		addAppToStore,
