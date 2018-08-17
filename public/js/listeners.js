@@ -4,14 +4,15 @@ const attachListeners = () => {
 	$('#app').on('click', '.delete', handlers.handleAppDelete) // $('#app').on('click', '.delete', handlers.handleAppDelete) put these in after authentication
 	$('#app').on('click', '.edit', handlers.handleGetApp)	// $('#app').on('click', '.edit', handlers.handleGetApp)
 	$('#app').on('click', '.save-update', handlers.handleAppUpdate)
+	$('#app').on('change', '#statusFilter', handlers.handleFilter)
+
 
 // NAV BAR LISTENERS
-	$('#app').on('click', '#current-apps', handlers.handleGetAllApps)
-	$('#app').on('click', '#add-new', render.newAppForm)
-	$('#app').on('click', '#logout', handlers.handleLogOut)
-	$('#app').on('change', '#statusFilter', handlers.handleFilter)
-	$('#app').on('click', '#current-jobs', handlers.handleJobsApi)
-
+	$('.container').on('click', '#current-apps', handlers.handleGetAllApps)
+	$('.container').on('click', '#add-new', render.newAppForm)
+	$('#app').on('click', '#add-first', render.newAppForm)
+	$('.container').on('click', '#logout', handlers.handleLogOut)
+	$('.container').on('click', '#current-jobs', handlers.handleJobsApi)
 
 //LOGIN & REGISTER LISTENERS
 	$('#app').on('submit', '#register-form', handlers.handleSubmitNewUser)

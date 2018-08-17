@@ -40,12 +40,16 @@ const handlers= (() => {
 			.then(token => {
 				localStorage.setItem('token', token.authToken);
 				api.getUser(token.authToken);
+				render.navBar()
 				handleGetAllApps()
 			})
 	}
 
 	const handleLogOut = event => {
 		localStorage.removeItem('token');
+
+		$('.container').html(`<h1>Trackter</h1>`)
+
 		render.newUserForm();
 		}
 
@@ -105,7 +109,12 @@ const handlers= (() => {
 		})
 
 		api.updateApp(id, updatedApp)
+
 			.then((updated) => {
+				swal({
+					title: 'Application updated!',
+					icon: 'success'
+				})
 				handleGetAllApps();
 			})
 	}

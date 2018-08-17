@@ -10,7 +10,7 @@ body{
 	/* border: 1px grey solid */
 }
 
-.nav-bar{
+.container {
 	/* position: fixed; */
 	width: 100%;
 	border: 1px black solid;
@@ -117,6 +117,21 @@ button:hover {
 	padding: 5px;
 }
 
+#no-apps {
+	border: 1px black solid;
+	height: 100px;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	/* display: inline-block; */
+}
+
+#add-first {
+	float: center;
+	margin-left: auto;
+	margin-right:auto;
+}
+
 .indiv-job{
 	text-align: left;
 	margin-bottom: 10px;
@@ -135,12 +150,6 @@ button:hover {
 	width: 30%;
 	height: 300px;
 	vertical-align: middle
-}
-
-.no-apps {
-	border: 1px black solid;
-	padding: 10px;
-	align-content: center
 }
 
 .viewed-app {
@@ -171,6 +180,10 @@ button:hover {
 
 .col-12 {
 	width: 100%
+}
+
+.swal-title {
+	font-size: 18px
 }
 
 /* Smartphones (portrait and landscape) ----------- */

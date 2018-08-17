@@ -44,14 +44,6 @@ const render =(() => {
 	const newAppForm = () => {
 
 		$('#app').html(`
-			<nav role='navigation' class='nav-bar'>
-				<ul>
-					<button class='nav-option' type='button' id='add-new'>Add New</button>
-					<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-					<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
-					<button class='nav-option' type='button' id='logout'>Log Out</button>
-				</ul>
-			</nav>
 		<form id='add-app' method='post' class='col-8'>
 			<h2>Add a New Application</h2>
 			<fieldset name='application' id='app-fieldset'>
@@ -103,53 +95,17 @@ const render =(() => {
 		</form>`)
 	}
 
-	// 	+
-	//
-	// 		applications.map(apps => {
-	//
-	// 		const created = apps.created
-	// 		const date = created.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1')
-	// 		const statusObj = {
-	// 			'viewed-app': 'Viewed Application',
-	// 			'applied': 'Applied',
-	// 			'interview': 'Interviewing',
-	// 			'follow-up': 'Followed Up',
-	// 			'rejected': 'Rejected',
-	// 			'offer': 'Got an Offer!',
-	// 			'declined-offer': 'Declined Offer'
-	// 		}
-	//
-	// 		return `<div class='indiv-app col-4 ${apps.status}' id='${apps.id}'>
-	// 							<h3>${apps.role} at ${apps.company}</h3>
-	// 							<p>${statusObj[apps.status]}</p>
-	// 							<p>Notes: ${apps.notes}
-	// 							<p>Created on ${date}</p>
-	// 							<button type='button' class='edit'>Edit App</button>
-	// 							<button type='button' class='delete'>Delete App</button>
-	// 						</div>`
-	// 					})
-	// 		.join(""));
-	//
-	// 		if (applications.length < 1) {
-	// 			$('#app').append(`
-	// 				<div class='no-apps'>
-	// 					<h2>You have no applications with that status</h2>
-	// 				</div>
-	// 				`)
-	// 		}
-	//
-	// 		$(document).ready(function getStatus() {
-	// 			if (store.filter){
-	// 				$('#statusFilter').val(store.filter)
-	// 			} else {
-	// 				$('#statusFilter').val('')
-	// 			}
-	// 		})
-	// 	}
-	// };
-
-
 	const updateAppForm = (application) => {
+
+		// $('.container').append(
+		// `<nav role='navigation' class='nav-bar'>
+		// 	<ul>
+		// 		<button class='nav-option' type='button' id='add-new'>Add New</button>
+		// 		<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+		// 		<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+		// 		<button class='nav-option' type='button' id='logout'>Log Out</button>
+		// 	</ul>
+		// </nav>`)
 
 		if (application.link === undefined) {
 			$('link').val('')
@@ -168,14 +124,6 @@ const render =(() => {
 		};
 
 		$('#app').html(`
-			<nav role='navigation' class='nav-bar'>
-				<ul>
-					<button class='nav-option' type='button' id='add-new'>Add New</button>
-					<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-					<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
-					<button class='nav-option' type='button' id='logout'>Log Out</button>
-				</ul>
-			</nav>
 			<form data-id='${application.id}' id='update-app' class='col-8' method='post'>
 				<h2>Update this Application</h2>
 				<fieldset name='application' id='app-fieldset'>
@@ -237,14 +185,6 @@ const render =(() => {
 
 		if (store.applications.length < 1) {
 			$('#app').html(`
-				<nav role='navigation' class='nav-bar'>
-					<ul>
-						<button class='nav-option' type='button' id='add-new'>Add New</button>
-						<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-						<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
-						<button class='nav-option' type='button' id='logout'>Log Out</button>
-					</ul>
-				</nav>
 				<h1>My Current Applications</h1>
 					<label for='statusFilter'>Filter by Status: </label>
 						<select name='statusFilter' id='statusFilter'>
@@ -257,9 +197,9 @@ const render =(() => {
 							<option value='offer'>Got an Offer!</option>
 							<option value='declined-offer'>Declined Offer</option>
 						</select><br>
-					<div class='no-apps'>
+					<div id='no-apps'>
 						<h2>You have no applications yet!</h2>
-						<button class='nav-option' type='button' id='add-new'>Add Your First App</button>
+						<button type='button' id='add-first'>Add Your First App</button>
 					</div>
 				`)
 		} else {
@@ -275,14 +215,6 @@ const render =(() => {
 			console.log(applications)
 
 		$('#app').html(`
-			<nav role='navigation' class='nav-bar'>
-				<ul>
-					<button class='nav-option' type='button' id='add-new'>Add New</button>
-					<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-					<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
-					<button class='nav-option' type='button' id='logout'>Log Out</button>
-				</ul>
-			</nav>
 			<h1>My Current Applications</h1>
 			<label for='statusFilter'>Filter by Status: </label>
 				<select name='statusFilter' id='statusFilter'>
@@ -342,14 +274,6 @@ const render =(() => {
 
 const openings = (jobs) => {
 	$('#app').html(`
-		<nav role='navigation' class='nav-bar'>
-			<ul>
-				<button class='nav-option' type='button' id='add-new'>Add New</button>
-				<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-				<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
-				<button class='nav-option' type='button' id='logout'>Log Out</button>
-			</ul>
-		</nav>
 		<h1>Current openings in User.Location</h1>` +
 
 		jobs.map(job => {
@@ -364,6 +288,17 @@ const openings = (jobs) => {
 			.join(""));
 		}
 
+const navBar = () => {
+	$('.container').append(
+		 `<nav role='navigation' class='nav-bar'>
+			 <ul>
+				 <button class='nav-option' type='button' id='add-new'>Add New</button>
+				 <button class='nav-option' type='button' id='current-apps'>Current Applications</button>
+				 <button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+				 <button class='nav-option' type='button' id='logout'>Log Out</button>
+			 </ul>
+		 </nav>`)
+}
 
 	return {
 		newAppForm,
@@ -371,7 +306,8 @@ const openings = (jobs) => {
 		updateAppForm,
 		newUserForm,
 		loginForm,
-		openings
+		openings,
+		navBar
 	}
 
 })()
