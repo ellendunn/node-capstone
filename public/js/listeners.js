@@ -20,5 +20,5 @@ const attachListeners = () => {
 	$('#app').on('submit', '#login-form', handlers.handleUserLogin)
 
 
-	$('#app').on('click', '.app-link', handlers.handleAddAppFromApi)
+	$('#app').on('click', '#app-link', handlers.handleAddAppFromApi)
 }

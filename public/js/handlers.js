@@ -47,6 +47,7 @@ const handlers= (() => {
 
 	const handleLogOut = event => {
 		localStorage.removeItem('token');
+		localStorage.removeItem('location');
 
 		$('.container').html(`<h1>Trackter</h1>`)
 
@@ -164,17 +165,21 @@ const handlers= (() => {
 	}
 
 	const handleJobsApi = event => {
+		const location = localStorage.getItem('location')
 
-		// api.getUserLocation(id)
-
-		api.getNewJobs('chicago')
-			.then(jobs => render.openings(jobs))
+		api.getNewJobs(location)
+			.then(jobs => {
+					render.openings(jobs, location)
+				})
 	}
 
 	const handleAddAppFromApi = event => {
 		const selected = $(event.currentTarget).closest('.indiv-job');
-		const id = selected[0].id
-		console.log(id)
+		const _id = selected[0].id
+
+
+		api.getJobOpening(_id)
+			.then(job => console.log(job))
 	}
 
 	return {

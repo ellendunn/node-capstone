@@ -1,32 +1,69 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const mongoose = require('mongoose');
+const faker = require('faker');
 
 const { app, runServer, closeServer } = require('../server');
 const { TEST_DATABASE_URL } = require('../config');
 const { Application } = require('../models/application')
+const { User } = require('../models/user')
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('index html & main css page', function() {
+function seedApps() {
+	console.info('seeding applications');
+		const seedData = [];
+		for (let i=1; i<=10; i++) {
+			seedData.push(generateApps());
+
+		return Application.insertMany(seedData);
+		};
+}
+
+function generateApps() {
+	return {
+		role: faker.lorem.sentence(),
+		company: faker.company.companyName(),
+		link: faker.internet.url(),
+		status: faker.lorem.word(),
+		user: faker.internet.userName(),
+		date: faker.date.recent()
+	}
+}
+
+function tearDownDb() {
+	console.warn('Deleting database');
+	return mongoose.connection.dropDatabase();
+}
+
+describe('Applications API resource', function() {
 
 	before(function(){
 		return runServer(TEST_DATABASE_URL, 8081);
 	});
 
+	beforeEach(function() {
+		return seedApps();
+	});
+
+	afterEach(function() {
+		return tearDownDb();
+	});
+
 	after(function(){
 		return closeServer();
 	})
-
-	it('it should exist', function() {
-		return chai 
-		.request(app)
-		.get('/')
-		.then(function(res) {
-			expect(res).to.have.status(200);
-		});
-	});
+	//
+	// it('it should exist', function() {
+	// 	return chai
+	// 	.request(app)
+	// 	.get('/')
+	// 	.then(function(res) {
+	// 		expect(res).to.have.status(200);
+	// 	});
+	// });
 
 	describe('GET applications endpoint', function() {
 
@@ -57,7 +94,16 @@ describe('index html & main css page', function() {
 						expect(application).to.be.a('object');
 						expect(application).to.include.keys(
 							'role', 'company', 'status' )
-					});
+						});
+						resApplication = res.body.applications[0];
+						return Application.findById(resApplication.id);
+				})
+				.then(function(app) {
+					expect(resApplication.id).to.equal(app.id);
+					expect(resApplication.role).to.equal(app.role);
+					expect(resApplication.company).to.equal(app.company);
+					expect(resApplication.status).to.equal(app.status);
+					expect(resApplication.user).to.equal(app.user);
 				});
 		});
 	});
@@ -146,5 +192,3 @@ describe('index html & main css page', function() {
 			});
 		});
 })
-
-

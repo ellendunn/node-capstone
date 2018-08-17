@@ -272,21 +272,28 @@ const render =(() => {
 	};
 
 
-const openings = (jobs) => {
-	$('#app').html(`
-		<h1>Current openings in User.Location</h1>` +
+const openings = (jobs, location) => {
+	if (jobs < 1) {
+		$('#app').html(`
+			<h2>There are currently no open positions in ${location}</h2>`)
 
-		jobs.map(job => {
-			return `<div class='indiv-job col-12' id='${job.id}'>
-								<h3>${job.title} at ${job.company}</h3>
-								<p>${job.location}</p>
-								<p>Want to apply?</p>
-								<a class='app-link' href='${job.url}' target='_blank'>${job.url}</a>
-								<p>Posted on ${job.created_at}</p>
-							</div>`
-						})
-			.join(""));
-		}
+	} else {
+		$('#app').html(`
+			<h1>Current openings in ${location}</h1>` +
+
+			jobs.map(job => {
+				return `<div class='indiv-job col-12' id='${job.id}'>
+									<h3>${job.title} at ${job.company}</h3>
+									<p>${job.location}</p>
+									<p>Want to apply?</p>
+									<a id='app-link' href='${job.url}' target='_blank'>${job.url}</a>
+									<p>Posted on ${job.created_at}</p>
+								</div>`
+							})
+				.join(""));
+			}
+	}
+
 
 const navBar = () => {
 	$('.container').append(
