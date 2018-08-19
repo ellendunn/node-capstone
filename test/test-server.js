@@ -28,7 +28,7 @@ function generateApps() {
 		company: faker.company.companyName(),
 		link: faker.internet.url(),
 		status: faker.lorem.word(),
-		user: faker.internet.userName(),
+		user: username,
 		date: faker.date.recent()
 	}
 }
@@ -38,6 +38,10 @@ function tearDownDb() {
 	return mongoose.connection.dropDatabase();
 }
 
+const username = 'username';
+const password = 'password';
+let jwt;
+
 describe('Applications API resource', function() {
 
 	before(function(){
@@ -45,7 +49,22 @@ describe('Applications API resource', function() {
 	});
 
 	beforeEach(function() {
-		return seedApps();
+
+		return User.hashPassword(password).then(password =>
+		      User.create({
+		        username,
+		        password
+		      })
+		    )
+				.then(function() {
+					return chai.request(app)
+					.post('/auth/login')
+					.send({username, password})
+				})
+				.then(function(res) {
+					jwt = res.body.authToken;
+					return seedApps()
+			    })
 	});
 
 	afterEach(function() {
@@ -55,11 +74,12 @@ describe('Applications API resource', function() {
 	after(function(){
 		return closeServer();
 	})
-	//
+
 	// it('it should exist', function() {
 	// 	return chai
 	// 	.request(app)
 	// 	.get('/')
+	// 	.set('Authorization', `Bearer ${jwt}`)
 	// 	.then(function(res) {
 	// 		expect(res).to.have.status(200);
 	// 	});
@@ -71,6 +91,7 @@ describe('Applications API resource', function() {
 			let res;
 			return chai.request(app)
 				.get('/applications')
+				.set('Authorization', `Bearer ${jwt}`)
 				.then(function(_res) {
 					res = _res;
 					expect(res).to.have.status(200);
@@ -86,6 +107,7 @@ describe('Applications API resource', function() {
 			let resApplication;
 			return chai.request(app)
 				.get('/applications')
+				.set('Authorization', `Bearer ${jwt}`)
 				.then(function(res) {
 					expect(res).to.have.status(200);
 					expect(res).to.be.json;
@@ -120,6 +142,7 @@ describe('Applications API resource', function() {
 
 				return chai.request(app)
 					.post('/applications')
+					.set('Authorization', `Bearer ${jwt}`)
 					.send(newApplication)
 					.then(function(res){
 						expect(res).to.have.status(201);
@@ -158,6 +181,7 @@ describe('Applications API resource', function() {
 
 						return chai.request(app)
 							.put(`/applications/${application.id}`)
+							.set('Authorization', `Bearer ${jwt}`)
 							.send(updateData);
 					})
 					.then(function(res) {

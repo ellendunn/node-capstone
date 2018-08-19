@@ -169,17 +169,57 @@ const handlers= (() => {
 
 		api.getNewJobs(location)
 			.then(jobs => {
+				// handleJobs(jobs)
 					render.openings(jobs, location)
 				})
+	}
+
+	const handleJobs = (jobs, id) => {
+		function isJob(array) {
+			return array.id === id
+		}
+
+		const viewedJob = jobs.find(isJob)
+
+		let role = viewedJob.title;
+		let company = viewedJob.company;
+		let link = viewedJob.url;
+		let status = 'viewed-app';
+		let created = new Date();
+
+		const newApp = JSON.stringify({
+			role, company, link, status, created
+		});
+
+		console.log(newApp)
+
+		api.postApp(newApp)
+			.then(newApplication => {
+				swal({
+					title: 'New Application Added!',
+					icon: 'success'
+				})
+				store.addAppToStore(newApplication)
+				// render.applications()
+			})
+
+
 	}
 
 	const handleAddAppFromApi = event => {
 		const selected = $(event.currentTarget).closest('.indiv-job');
 		const _id = selected[0].id
+		const location = localStorage.getItem('location')
 
+		console.log(_id)
+		api.getNewJobs(location)
+		.then(jobs => {
+			handleJobs(jobs, _id)
 
-		api.getJobOpening(_id)
-			.then(job => console.log(job))
+		})
+
+		// api.getJobOpening(_id)
+		// 	.then(job => console.log(job))
 	}
 
 	return {
@@ -194,6 +234,7 @@ const handlers= (() => {
 		handleLogOut,
 		handleFilter,
 		handleAddAppFromApi,
-		handleErrors
+		handleErrors,
+		handleJobs
 	}
 })()

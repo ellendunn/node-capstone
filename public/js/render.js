@@ -97,16 +97,6 @@ const render =(() => {
 
 	const updateAppForm = (application) => {
 
-		// $('.container').append(
-		// `<nav role='navigation' class='nav-bar'>
-		// 	<ul>
-		// 		<button class='nav-option' type='button' id='add-new'>Add New</button>
-		// 		<button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-		// 		<button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
-		// 		<button class='nav-option' type='button' id='logout'>Log Out</button>
-		// 	</ul>
-		// </nav>`)
-
 		if (application.link === undefined) {
 			$('link').val('')
 		};
@@ -200,6 +190,7 @@ const render =(() => {
 					<div id='no-apps'>
 						<h2>You have no applications yet!</h2>
 						<button type='button' id='add-first'>Add Your First App</button>
+						<button type='button' id='explore-jobs'>Explore Opportunities</button>
 					</div>
 				`)
 		} else {

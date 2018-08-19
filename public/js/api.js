@@ -2,9 +2,7 @@
 
 const api = (() => {
 
-	const url = window.location.origin ;
-
-	const JOBS_SEARCH_URL = 'https://jobs.github.com/'
+	const JOBS_SEARCH_URL = 'https://jobs.github.com/';
 
 	const getNewJobs = (query, callback) =>
 		$.ajax({
@@ -19,18 +17,26 @@ const api = (() => {
 			})
 			.then(res => res)
 
-	const getJobOpening = (query) => {
-		const url = JOBS_SEARCH_URL + `positions/${query}.json`;
-		const token = localStorage.getItem('token')
+	// const getJobOpening = (query) => {
+	// 	const url = JOBS_SEARCH_URL + `positions/${query}`;
+	//
+	// 	return $.getJSON(url)
+	// 	// return $.ajax({
+	// 	// 	type: 'GET',
+	// 	// 	url: url,
+	// 	// 	dataType: 'json',
+	// 	// 	contentType: 'application/json'
+	// 	// 	// jsonpCallback: {
+  // 	// 	// 	jsonp: false
+	// 	// 	// }
+	// 	// })
+	// 		.done(res => res)
+	// }
 
-		return $.ajax({
-			type: 'POST',
-			url: url,
-			dataType: 'jsonp',
-			contentType: 'application/json'
-		})
-			.done(res => res)
-	}
+	// getJobOpening('c1ee6c72-a25c-11e8-8e06-38b56d31bc16')
+
+
+	const url = window.location.origin ;
 
 	const postUser = user =>
 		$.ajax({
@@ -67,7 +73,7 @@ const api = (() => {
 				Authorization: `Bearer ${token}`
 			 }
 		})
-		.then(res => console.log(res))
+		.then(res => res)
 
 	const getAllUsers = () => {
 		return $.getJSON(url + '/users')
@@ -162,8 +168,7 @@ const api = (() => {
 		deleteApp,
 		getApp,
 		updateApp,
-		getNewJobs,
-		getJobOpening
+		getNewJobs
 		}
 
 })()

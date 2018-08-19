@@ -13,6 +13,8 @@ const attachListeners = () => {
 	$('#app').on('click', '#add-first', render.newAppForm)
 	$('.container').on('click', '#logout', handlers.handleLogOut)
 	$('.container').on('click', '#current-jobs', handlers.handleJobsApi)
+	$('#app').on('click', '#explore-jobs', handlers.handleJobsApi)
+
 
 //LOGIN & REGISTER LISTENERS
 	$('#app').on('submit', '#register-form', handlers.handleSubmitNewUser)
