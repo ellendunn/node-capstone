@@ -38,11 +38,13 @@ const handlers= (() => {
 			})
 	}
 
+
 	const handleLogOut = event => {
 		localStorage.removeItem('token');
+
 		$('.container').html(`<h1>[ Trackter ] </h1>
 		<p> Organize Your Job Search<p>`)
-		render.newUserForm();
+		render.loginForm();
 		}
 
 
@@ -203,7 +205,6 @@ const handlers= (() => {
 		const _id = selected[0].id
 		const location = localStorage.getItem('location')
 
-		console.log(_id)
 		api.getNewJobs(location)
 		.then(jobs => {
 			handleJobs(jobs, _id)

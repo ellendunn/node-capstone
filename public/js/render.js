@@ -15,7 +15,7 @@ const render =(() => {
 						<input  name='username' id='username' type='text' placeholder='janedoe' required/><br>
 						<label for='password'>Password: </label>
 						<input name='password' id='password' type='password' placeholder='password123' required/><br>
-						<button type='submit'>Register</button> <br>
+						<button type='submit'>Register</button><br>
 						<button type='button' id='take-to-login'>Already have an account?</button>
 					</fieldset>
 				</form>
@@ -27,12 +27,13 @@ const render =(() => {
 			`<div class = 'user-auth'>
 				<form id='login-form' method='get' class='col-6'>
 					<fieldset>
-						<legend>Log In with your Username and Password</legend>
+						<legend>Log In to View Your Applications</legend>
 						<label for='username'>Username: </label>
 						<input name='username' id='username' type='text' placeholder='janedoe' required/><br>
 						<label for='password'>Password: </label>
 						<input name='password' id='password' type='password' placeholder='password123' required /><br>
-						<button type='submit'>Sign In</button>
+						<button type='submit'>Sign In</button><br>
+						<button type='button' id='take-to-register'>Create Account</button>
 					</fieldset>
 				</form>
 			</div>`
@@ -40,7 +41,6 @@ const render =(() => {
 	}
 
 	const newAppForm = () => {
-
 		$('#app').html(`
 		<form id='add-app' method='post' class='col-8'>
 			<h2>Add a New Application</h2>
@@ -186,7 +186,7 @@ const render =(() => {
 					<div id='no-apps'>
 						<h2>You have no applications yet!</h2>
 						<button type='button' id='add-first'>Add Your First App</button>
-						<button type='button' id='explore-jobs'>Explore Opportunities</button>
+						<button type='button' id='explore-jobs'>Search Job Opportunities</button>
 					</div>
 				`)
 		} else {
@@ -198,8 +198,6 @@ const render =(() => {
 					return app.status == store.filter
 				})
 			}
-
-			console.log(applications)
 
 		$('#app').html(`
 			<h1>My Current Applications</h1>
@@ -295,7 +293,7 @@ const openings = (jobs, location) => {
 				<legend></legend>
 				<label for='locationSearch'>Try Searching in a New Location: </label>
 				<input name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL'/>
-				<button type='submit' id='loc-search-button'>Search Opportunities</button>
+				<button type='submit' id='loc-search-button'>Search Job Openings</button>
 				</fieldset>
 			</form>`)
 
@@ -321,15 +319,15 @@ const navBar = () => {
 	$('.container').append(
 		 `<nav role='navigation' class='nav-bar'>
 			 <ul>
-				 <button class='nav-option' type='button' id='add-new'>Add New</button>
-				 <button class='nav-option' type='button' id='current-apps'>Current Applications</button>
-				 <button class='nav-option' type='button' id='current-jobs'>Current Openings</button>
+				 <button class='nav-option' type='button' id='add-new'>Add New Application</button>
+				 <button class='nav-option' type='button' id='current-apps'>View My Applications</button>
+				 <button class='nav-option' type='button' id='current-jobs'>Search Job Openings</button>
 				 <button class='nav-option' type='button' id='logout'>Log Out</button>
 			 </ul>
 		 </nav>`)
 }
 
-const locationSearch  =() => {
+const locationSearch  = () => {
 	$('#app').html(
 		`<h1>Enter a location to search:</h1>
 		<form id='loc-form'>

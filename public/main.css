@@ -92,10 +92,11 @@ button[type='submit'], button[type='button'] {
 	text-align: center;
 	padding: 5px;
 	width: auto;
-	margin-bottom: 0px;
+	margin-bottom: 10px;
 	-webkit-transition-duration: 0.2s;
   transition-duration: 0.2s;
 	cursor: pointer;
+	font-size: 14px
 }
 
 /* #loc-search-button, button[type='button'] {
