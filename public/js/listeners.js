@@ -12,7 +12,8 @@ const attachListeners = () => {
 	$('.container').on('click', '#add-new', render.newAppForm)
 	$('#app').on('click', '#add-first', render.newAppForm)
 	$('.container').on('click', '#logout', handlers.handleLogOut)
-	$('.container').on('click', '#current-jobs', handlers.handleJobsApi)
+	$('.container').on('click', '#current-jobs', render.locationSearch)
+	$('#app').on('submit', '#loc-form', handlers.handleJobsApi)
 	$('#app').on('click', '#explore-jobs', handlers.handleJobsApi)
 
 

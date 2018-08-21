@@ -45,11 +45,10 @@ let jwt;
 describe('Applications API resource', function() {
 
 	before(function(){
-		return runServer(TEST_DATABASE_URL, 8081);
+		return runServer(TEST_DATABASE_URL, 8082);
 	});
 
 	beforeEach(function() {
-
 		return User.hashPassword(password).then(password =>
 		      User.create({
 		        username,

@@ -8,7 +8,6 @@ mongoose.Promise = global.Promise;
 const userSchema = mongoose.Schema({
 	firstName: {type: 'string', default: ''},
 	lastName: {type: 'string', default: ''},
-	location: {type: 'string', default: ''},
 	username: {
 		type: 'string',
 		required: true,
@@ -25,7 +24,6 @@ userSchema.methods.serialize = function() {
 		id: this._id,
 		firstName: this.firstName || '',
 		lastName: this.lastName || '',
-		location: this.location || '',
 		username: this.username || '',
 	};
 };

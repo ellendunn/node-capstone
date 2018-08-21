@@ -13,13 +13,10 @@ const handlers= (() => {
 
 		let firstName = $('#firstName').val();
 		let lastName = $('#lastName').val();
-		let location = $('#location').val()
 		let username = $('#username').val();
 		let password = $('#password').val();
 
-		const newUser = JSON.stringify({firstName, lastName, location, username, password})
-
-		localStorage.setItem('location', location)
+		const newUser = JSON.stringify({firstName, lastName, username, password})
 
 		api.postUser(newUser)
 			.then(user => {
@@ -47,7 +44,6 @@ const handlers= (() => {
 
 	const handleLogOut = event => {
 		localStorage.removeItem('token');
-		localStorage.removeItem('location');
 
 		$('.container').html(`<h1>Trackter</h1>`)
 
@@ -79,7 +75,7 @@ const handlers= (() => {
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: 'New Application Added!',
+					title: `New Application Added with the status "${newApplication.status}"!`,
 					icon: 'success'
 				})
 				store.addAppToStore(newApplication)
@@ -113,7 +109,7 @@ const handlers= (() => {
 
 			.then((updated) => {
 				swal({
-					title: 'Application updated!',
+					title: `Application updated!`,
 					icon: 'success'
 				})
 				handleGetAllApps();
@@ -165,11 +161,11 @@ const handlers= (() => {
 	}
 
 	const handleJobsApi = event => {
-		const location = localStorage.getItem('location')
+		event.preventDefault();
+		const location = $('#locationSearch').val();
 
 		api.getNewJobs(location)
 			.then(jobs => {
-				// handleJobs(jobs)
 					render.openings(jobs, location)
 				})
 	}
@@ -196,7 +192,7 @@ const handlers= (() => {
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: 'New Application Added!',
+					title: `New Application Added with the status "${newApplication.status}"!`,
 					icon: 'success'
 				})
 				store.addAppToStore(newApplication)

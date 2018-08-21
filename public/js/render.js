@@ -11,8 +11,6 @@ const render =(() => {
 						<input value='Ellen' name='firstName' id='firstName' type='text' placeholder='Jane' required/><br>
 						<label for='lastName'>Last Name: </label>
 						<input value='Dunn' name='lastName' id='lastName' type='text' placeholder='Doe' required/><br>
-						<label for='location'>Location (City, State): </label>
-						<input value='Chicago, IL' name='location' id='location' type='text' placeholder='Phoenix, AZ' required/><br>
 						<label for='username'>Username: </label>
 						<input value='ellendunn' name='username' id='username' type='text' placeholder='janedoe' required/><br>
 						<label for='password'>Password: </label>
@@ -266,11 +264,19 @@ const render =(() => {
 const openings = (jobs, location) => {
 	if (jobs < 1) {
 		$('#app').html(`
-			<h2>There are currently no open positions in ${location}</h2>`)
+			<h2>There are currently no open positions in "${location}"</h2>
+			<form id='loc-form'>
+				<fieldset>
+				<legend></legend>
+				<label for='locationSearch'>Try Searching in a New Location: </label>
+				<input name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL'/>
+				<button type='submit' id='loc-search-button'>Search Opportunities</button>
+				</fieldset>
+			</form>`)
 
 	} else {
 		$('#app').html(`
-			<h1>Current openings in ${location}</h1>` +
+			<h1>Current openings in "${location}"</h1>` +
 
 			jobs.map(job => {
 				return `<div class='indiv-job col-12' id='${job.id}'>
@@ -298,6 +304,19 @@ const navBar = () => {
 		 </nav>`)
 }
 
+const locationSearch  =() => {
+	$('#app').html(
+		`<h1>Enter a location to search:</h1>
+		<form id='loc-form'>
+			<fieldset>
+			<legend></legend>
+			<label for='locationSearch'></label>
+			<input name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL'/>
+			<button type='submit' id='loc-search-button'>Search Opportunities</button>
+			</fieldset>
+		</form>`)
+}
+
 	return {
 		newAppForm,
 		applications,
@@ -305,7 +324,8 @@ const navBar = () => {
 		newUserForm,
 		loginForm,
 		openings,
-		navBar
+		navBar,
+		locationSearch
 	}
 
 })()
