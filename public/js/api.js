@@ -17,24 +17,6 @@ const api = (() => {
 			})
 			.then(res => res)
 
-	// const getJobOpening = (query) => {
-	// 	const url = JOBS_SEARCH_URL + `positions/${query}`;
-	//
-	// 	return $.getJSON(url)
-	// 	// return $.ajax({
-	// 	// 	type: 'GET',
-	// 	// 	url: url,
-	// 	// 	dataType: 'json',
-	// 	// 	contentType: 'application/json'
-	// 	// 	// jsonpCallback: {
-  // 	// 	// 	jsonp: false
-	// 	// 	// }
-	// 	// })
-	// 		.done(res => res)
-	// }
-
-	// getJobOpening('c1ee6c72-a25c-11e8-8e06-38b56d31bc16')
-
 
 	const url = window.location.origin ;
 

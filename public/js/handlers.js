@@ -10,12 +10,10 @@ const handlers= (() => {
 //USER & AUTH HANDLERS
 	const handleSubmitNewUser = event => {
 		event.preventDefault();
-
 		let firstName = $('#firstName').val();
 		let lastName = $('#lastName').val();
 		let username = $('#username').val();
 		let password = $('#password').val();
-
 		const newUser = JSON.stringify({firstName, lastName, username, password})
 
 		api.postUser(newUser)
@@ -27,10 +25,8 @@ const handlers= (() => {
 
 	const handleUserLogin = event => {
 		event.preventDefault();
-
 		let username = $('#username').val();
 		let password = $('#password').val();
-
 		const userCred = JSON.stringify({username, password})
 
 		api.getUserJwt(userCred)
@@ -44,9 +40,7 @@ const handlers= (() => {
 
 	const handleLogOut = event => {
 		localStorage.removeItem('token');
-
 		$('.container').html(`<h1>Trackter</h1>`)
-
 		render.newUserForm();
 		}
 
@@ -160,6 +154,7 @@ const handlers= (() => {
 		render.applications()
 	}
 
+
 	const handleJobsApi = event => {
 		event.preventDefault();
 		const location = $('#locationSearch').val();
@@ -176,30 +171,30 @@ const handlers= (() => {
 		}
 
 		const viewedJob = jobs.find(isJob)
-
 		let role = viewedJob.title;
 		let company = viewedJob.company;
 		let link = viewedJob.url;
+		let contact = {
+			name: '',
+			title: '',
+			email: '',
+			phone: ''
+		}
 		let status = 'viewed-app';
 		let created = new Date();
 
 		const newApp = JSON.stringify({
-			role, company, link, status, created
+			role, company, link, contact, status, created
 		});
-
-		console.log(newApp)
 
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: `New Application Added with the status "${newApplication.status}"!`,
+					title: `New Application Added with the status "Viewed App"!`,
 					icon: 'success'
 				})
 				store.addAppToStore(newApplication)
-				// render.applications()
 			})
-
-
 	}
 
 	const handleAddAppFromApi = event => {
@@ -211,11 +206,8 @@ const handlers= (() => {
 		api.getNewJobs(location)
 		.then(jobs => {
 			handleJobs(jobs, _id)
-
 		})
 
-		// api.getJobOpening(_id)
-		// 	.then(job => console.log(job))
 	}
 
 	return {

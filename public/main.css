@@ -16,6 +16,20 @@ body{
 	border: 1px black solid;
 	display: inline-block;
 	padding: 10px;
+	background: lightgray;
+	/* background:
+		url('https://images.idgesg.net/images/article/2017/09/networking-100735059-large.jpg');
+		fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		align-content: center; */
+
+}
+
+.container h1, .container p {
+	display: inline-block;
 }
 
 .nav-option {
@@ -74,25 +88,53 @@ input[type='text'], input[type='password'], input[type='email'] {
   transition: opacity 0.4s;
 }
 
-button[type='submit'] button[type='button'] {
+button[type='submit'], button[type='button'] {
 	text-align: center;
 	padding: 5px;
-	width: 100%;
+	width: auto;
 	margin-bottom: 0px;
 	-webkit-transition-duration: 0.2s;
   transition-duration: 0.2s;
+	cursor: pointer;
 }
+
+/* #loc-search-button, button[type='button'] {
+	text-align: center;
+	padding: 5px;
+	margin-bottom: 0px;
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+	width: auto;
+	cursor: pointer;
+} */
 
 button:hover {
 	background-color: #298eea;
 	color: white
 }
 
+#statusFilter, #status {
+	cursor: pointer;
+	text-align: center;
+	height: 30px;
+	width: 200px;
+	margin-bottom: 0px;
+}
+
+#locationSearch {
+	text-align: left;
+	height: 25px;
+	width: auto;
+	margin-bottom: 0px;
+}
+
+
 #update-app, #add-app {
 	border: 1px black solid;
 	display: inline-block;
 	text-align: center;
 	width: 75%;
+	font-size: 12px
 }
 
 #notes{
@@ -135,21 +177,36 @@ button:hover {
 .indiv-job{
 	text-align: left;
 	margin-bottom: 10px;
-	padding: 10px;
-	border: 1px gray solid;
+	padding-left: 20px;
+	border: 2px lightgray solid;
 	display: inline-block;
 	height: auto;
-	vertical-align: left
+	vertical-align: left;
+	border-radius: 7px;
+}
+
+p {
+	padding-top: 0px
 }
 
 .indiv-app{
 	margin: 10px;
-	padding: 10px;
-	border: 1px gray solid;
 	display: inline-block;
 	width: 30%;
-	height: 300px;
-	vertical-align: middle
+	height: 450px;
+	vertical-align: middle;
+	font-size: 12px;
+	border-radius: 7px;
+}
+
+#contact-info {
+	border: 1px gray dotted;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 0px;
+	text-align: left;
+	padding-left: 40px;
+
 }
 
 .viewed-app {
@@ -184,6 +241,19 @@ button:hover {
 
 .swal-title {
 	font-size: 18px
+}
+
+
+@media screen and (max-width: 940px) {
+  .col-4 {
+		width: 45%
+	}
+}
+
+@media screen and (max-width: 600px) {
+  .col-4 {
+		width: 95%
+	}
 }
 
 /* Smartphones (portrait and landscape) ----------- */

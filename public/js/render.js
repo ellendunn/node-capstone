@@ -6,15 +6,15 @@ const render =(() => {
 			`<div class = 'user-auth'>
 				<form id='register-form' method='post' class='col-6'>
 					<fieldset>
-						<legend>New User Info:</legend>
+						<legend>Enter New User Info:</legend>
 						<label for='firstName'>First Name: </label>
-						<input value='Ellen' name='firstName' id='firstName' type='text' placeholder='Jane' required/><br>
+						<input name='firstName' id='firstName' type='text' placeholder='Jane' required/><br>
 						<label for='lastName'>Last Name: </label>
-						<input value='Dunn' name='lastName' id='lastName' type='text' placeholder='Doe' required/><br>
+						<input name='lastName' id='lastName' type='text' placeholder='Doe' required/><br>
 						<label for='username'>Username: </label>
-						<input value='ellendunn' name='username' id='username' type='text' placeholder='janedoe' required/><br>
+						<input  name='username' id='username' type='text' placeholder='janedoe' required/><br>
 						<label for='password'>Password: </label>
-						<input value='password' name='password' id='password' type='password' placeholder='password123' required/><br>
+						<input name='password' id='password' type='password' placeholder='password123' required/><br>
 						<button type='submit'>Register</button> <br>
 						<button type='button' id='take-to-login'>Already have an account?</button>
 					</fieldset>
@@ -27,11 +27,11 @@ const render =(() => {
 			`<div class = 'user-auth'>
 				<form id='login-form' method='get' class='col-6'>
 					<fieldset>
-						<legend>User Info:</legend>
+						<legend>Log In with your Username and Password</legend>
 						<label for='username'>Username: </label>
-						<input value='ellendunn' name='username' id='username' type='text' placeholder='janedoe' required/><br>
+						<input name='username' id='username' type='text' placeholder='janedoe' required/><br>
 						<label for='password'>Password: </label>
-						<input value='password' name='password' id='password' type='password' placeholder='password123' required /><br>
+						<input name='password' id='password' type='password' placeholder='password123' required /><br>
 						<button type='submit'>Sign In</button>
 					</fieldset>
 				</form>
@@ -47,10 +47,10 @@ const render =(() => {
 			<fieldset name='application' id='app-fieldset'>
 				<legend>Application Info</legend>
 				<label for='role'>Role: </label>
-				<input value='Engineer in Test' placeholder='Junior Developer' type='text' name='role' id='role' required/>
+				<input placeholder='Junior Developer' type='text' name='role' id='role' required/>
 				<br>
 				<label for='company'>Company: </label>
-				<input value='Apple' placeholder='The Example Biz' type='text' name='company' id='company' required/>
+				<input placeholder='The Example Biz' type='text' name='company' id='company' required/>
 				<br>
 				<label for='link'>Link to Job Posting: </label>
 				<input placeholder='www.joburl.com' type='text' name='link' id='link' />
@@ -82,8 +82,7 @@ const render =(() => {
 					<br>
 				</fieldset>
 				<label for='notes'>Notes: </label><br>
-				<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'>
-				</textarea>
+				<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'></textarea>
 				<br>
 				<input for='date' type='hidden' name='date' id='date' />
 					<script type='text/javascript'> document.getElementById('date').value=Date();
@@ -152,8 +151,7 @@ const render =(() => {
 						<br>
 					</fieldset>
 					<label for='notes'>Notes: </label><br>
-					<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'>
-					</textarea>
+					<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'></textarea>
 					<br>
 					<input for='date' type='hidden' name='date' id='date' />
 						<script type='text/javascript'> document.getElementById('date').value=Date();
@@ -231,11 +229,38 @@ const render =(() => {
 				'declined-offer': 'Declined Offer'
 			}
 
+			const contactObj = [
+				apps.contacts.name,
+				apps.contacts.title,
+				apps.contacts.email,
+				apps.contacts.phone
+			]
+
+			for (let i = 0; i < contactObj.length; i++) {
+				if (contactObj[i] === '' || contactObj[i] === undefined) {
+					 contactObj[i] = 'None'
+				}
+			}
+
+			let notes = apps.notes;
+
+			if (apps.notes === '') {
+				notes = `Click 'Edit App' to add notes.`
+			}
+
 			return `<div class='indiv-app col-4 ${apps.status}' id='${apps.id}'>
-								<h3>${apps.role} at ${apps.company}</h3>
-								<p>${statusObj[apps.status]}</p>
-								<p>Notes: ${apps.notes}</p>
-								<p>Created on ${date}</p>
+								<h2>${apps.role} at ${apps.company}</h2>
+								<a href='${apps.link}'>Link to Application</a>
+								<h3>Status: ${statusObj[apps.status]}</h3>
+								<div id='contact-info'>
+								<h3>Contact: </h3>
+								<p>Name: ${contactObj[0]} </p>
+								<p>Contact Title: ${contactObj[1]} </p>
+								<p>Email: ${contactObj[2]}</p>
+								<p>Phone: ${contactObj[3]} </p>
+								</div>
+								<p>Notes: ${notes}</p>
+								<p>Application Created ${date}</p>
 								<button type='button' class='edit'>Edit App</button>
 								<button type='button' class='delete'>Delete App</button>
 							</div>`
