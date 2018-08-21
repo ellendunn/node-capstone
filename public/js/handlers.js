@@ -40,7 +40,8 @@ const handlers= (() => {
 
 	const handleLogOut = event => {
 		localStorage.removeItem('token');
-		$('.container').html(`<h1>Trackter</h1>`)
+		$('.container').html(`<h1>[ Trackter ] </h1>
+		<p> Organize Your Job Search<p>`)
 		render.newUserForm();
 		}
 
