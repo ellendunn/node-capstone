@@ -1,5 +1,3 @@
-
-
 const api = (() => {
 
 	const JOBS_SEARCH_URL = 'https://jobs.github.com/';
@@ -14,8 +12,7 @@ const api = (() => {
 			dataType: 'jsonp',
 			contentType: 'application/json',
 			})
-			.then(res => res)
-
+			.then(res => res);
 
 	const url = window.location.origin ;
 
@@ -31,8 +28,7 @@ const api = (() => {
 		.fail(function(error) {
 			let errMsg = error.responseJSON.message;
 			handlers.handleErrors(errMsg)
-		})
-
+		});
 
 	const getUserJwt = userCred =>
 		$.ajax({
@@ -45,12 +41,7 @@ const api = (() => {
 		.then(res => res)
 		.fail(function(error) {
 			handlers.handleErrors('Invalid Username or Password')
-		})
-
-	const getAllUsers = () => {
-		return $.getJSON(url + '/users')
-		.then(res => res)
-	}
+		});
 
 	const postApp = application => {
 		const token = localStorage.getItem('token');
@@ -66,7 +57,7 @@ const api = (() => {
 			 }
 		})
 		.then(res => res)
-	}
+	};
 
 	const getAllApps = () => {
 		const token = localStorage.getItem('token')
@@ -81,7 +72,7 @@ const api = (() => {
 			 }
 		})
 		.then(res => res)
-	}
+	};
 
 	const deleteApp = app_id => {
 		const token = localStorage.getItem('token')
@@ -96,9 +87,9 @@ const api = (() => {
 			 }
 		})
 		.then(res => res)
-	}
+	};
 
-	const getApp = app_id =>{
+	const getApp = app_id => {
 		const token = localStorage.getItem('token')
 
 		return $.ajax({
@@ -111,7 +102,7 @@ const api = (() => {
 			 }
 		})
 		.then(res => res)
-	}
+	};
 
 	const updateApp = (app_id, updated) => {
 		const token = localStorage.getItem('token')
@@ -125,16 +116,13 @@ const api = (() => {
 			headers: {
 				Authorization: `Bearer ${token}`
 			 }
-
 		})
-		.then(res =>  res)
-	}
+		.then(res => res)
+	};
 
 	return {
 		postUser,
 		getUserJwt,
-		// getUser,
-		getAllUsers,
 		postApp,
 		getAllApps,
 		deleteApp,

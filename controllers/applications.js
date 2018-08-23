@@ -18,7 +18,6 @@ exports.getAllApps = (req, res) => {
 		})
 }
 
-
 exports.getApp = (req, res) => {
 	Application
 		.findById(req.params.id)
@@ -64,7 +63,7 @@ exports.postApp = (req, res) => {
 						res.status(500).json({message: 'Internal Server Error 3'})
 					})
 				}
-			});
+		});
 }
 
 exports.updateApp = (req, res) => {
@@ -94,5 +93,4 @@ exports.deleteApp = (req, res) => {
 		.findByIdAndRemove(req.params.id)
 		.then(application => res.status(204).end())
 		.catch(err => res.status(500).json({ message: 'Internal Server Error 5' }))
-
 }

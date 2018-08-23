@@ -2,8 +2,7 @@ const handlers= (() => {
 
 	const handleErrors = message => {
 		swal({
-			title: message,
-			// icon: 'warning'
+			title: message
 		})
 	}
 
@@ -12,17 +11,11 @@ const handlers= (() => {
 		event.preventDefault();
 		const userData = $( event.currentTarget ).serializeArray();
 
-			const data = userData.reduce((obj, input) => {
-				obj[input.name] = input.value
-				return obj
-			}, {})
+		const data = userData.reduce((obj, input) => {
+			obj[input.name] = input.value
+			return obj
+		}, {})
 
-		console.log(data)
-
-		// let firstName = $('#firstName').val();
-		// let lastName = $('#lastName').val();
-		// let username = $('#username').val();
-		// let password = $('#password').val();
 		const newUser = JSON.stringify(data)
 
 		api.postUser(newUser)
@@ -39,11 +32,9 @@ const handlers= (() => {
 		let password = $('#password').val();
 		const userCred = JSON.stringify({username, password})
 
-
 		api.getUserJwt(userCred)
 			.then(token => {
 				localStorage.setItem('token', token.authToken);
-				// api.getUser(token.authToken);
 				render.navBar();
 				handleGetAllApps()
 			})
@@ -85,8 +76,7 @@ const handlers= (() => {
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: `New Application Added"!`,
-					// icon: 'success'
+					title: `New Application Added"!`
 				})
 				store.addAppToStore(newApplication)
 				console.log(newApplication)
@@ -103,29 +93,13 @@ const handlers= (() => {
 		const extractedData = extractData(appData)
 		extractedData.id = id
 
-
-		// let name = $('#name').val();
-		// let title = $('#title').val();
-		// let email = $('#email').val();
-		// let phone = $('#phone').val();
-		//
-		// let role = $('#role').val();
-		// let company = $('#company').val();
-		// let link = $('#link').val();
-		// let status = $('#status').val();
-		//
-		// let contacts = {name, title, email, phone};
-		// let notes = $('#notes').val();
-		// let created = $('#date').val();
-
 		const updatedApp = JSON.stringify(extractedData)
 
 		api.updateApp(id, updatedApp)
 
 			.then((updated) => {
 				swal({
-					title: `Application updated!`,
-					// icon: 'success'
+					title: `Application updated!`
 				})
 				handleGetAllApps();
 			})
@@ -147,7 +121,6 @@ const handlers= (() => {
 
 		swal({
 			title: 'Are you sure you want to delete this application?',
-			// icon: 'warning',
 			buttons: true,
   		dangerMode: true
 		})
@@ -175,7 +148,6 @@ const handlers= (() => {
 		render.applications()
 	}
 
-
 	const handleJobsApi = event => {
 		event.preventDefault();
 		localStorage.removeItem('location');
@@ -193,8 +165,6 @@ const handlers= (() => {
 		function isJob(array) {
 			return array.id === id
 		}
-
-		console.log(jobs)
 
 		const viewedJob = jobs.find(isJob);
 		console.log(viewedJob)
@@ -217,8 +187,7 @@ const handlers= (() => {
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: `New Application Added with the status "Viewed App"!`,
-					// icon: 'success'
+					title: `New Application Added with the status "Viewed App"!`
 				})
 				store.addAppToStore(newApplication)
 			})
@@ -229,12 +198,10 @@ const handlers= (() => {
 		const _id = selected[0].id
 		const location = localStorage.getItem('location');
 
-
 		api.getNewJobs(location)
 		.then(jobs => {
 			handleJobs(jobs, _id)
 		})
-
 	}
 
 	return {
@@ -252,4 +219,5 @@ const handlers= (() => {
 		handleErrors,
 		handleJobs
 	}
+	
 })()

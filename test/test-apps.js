@@ -77,7 +77,6 @@ describe('Applications API resource', function() {
 	describe('GET applications endpoint', function() {
 		this.timeout(10000);
 
-
 		it('should return all current applications', function() {
 			let res;
 			return chai.request(app)

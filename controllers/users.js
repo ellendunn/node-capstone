@@ -9,7 +9,6 @@ exports.postUser = (req, res) => {
 	const missingField = requiredFields.find(field => !(field in req.body));
 
 	if (missingField) {
-		console.log('here')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -24,7 +23,6 @@ exports.postUser = (req, res) => {
 	});
 
 	if (notStringFields) {
-		console.log('here 1')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -40,7 +38,6 @@ exports.postUser = (req, res) => {
 		)
 
 	if(nonTrimmedfield) {
-		console.log('here 2')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -102,7 +99,6 @@ exports.postUser = (req, res) => {
 			});
 		})
 		.then(user => {
-			console.log(user)
 			return res.status(201).json(user.serialize());
 		})
 		.catch(err => {
@@ -112,16 +108,3 @@ exports.postUser = (req, res) => {
 			res.status(500).json({code: 500, message: 'Internal Server Error'})
 		});
 };
-
-exports.getUser = (req, res) => {
-	User
-		.findById(req.params.id)
-		.then(user => {
-			console.log(user);
-			return res.status(201).json(user.serialize());
-		})
-		.catch(err => {
-			console.error(err);
-			res.status(500).json({message: 'Internal server error 1'})
-		});
-}

@@ -2,9 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-// const morgan = require('morgan');
 const passport = require('passport');
-
 
 const { router: usersRouter } = require('./routes/users-router');
 const { router: authRouter } = require('./routes/auth-router');
@@ -19,7 +17,6 @@ const { PORT, DATABASE_URL } = require('./config');
 
 const app = express();
 
-// app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(express.json());
 
@@ -27,9 +24,6 @@ app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-	// if(req.method = 'OPTIONS')  {
-	// 	return res.sendStatus(204)
-	// }
 	next();
 });
 
@@ -39,7 +33,7 @@ passport.use(jwtStrategy);
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.use('/applications', jwtAuth, appRouter);
-app.use('/users', usersRouter);//now do I need to add /api before endpoints?
+app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 
 app.use('*', function(req,res) {

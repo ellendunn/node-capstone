@@ -1,9 +1,10 @@
 
 const attachListeners = () => {
 
+//APPLICATION LISTENERS
 	$('#app').on('submit', '#add-app', handlers.handleAppSubmit)
-	$('#app').on('click', '#delete', handlers.handleAppDelete) // $('#app').on('click', '.delete', handlers.handleAppDelete) put these in after authentication
-	$('#app').on('click', '#edit', handlers.handleGetApp)	// $('#app').on('click', '.edit', handlers.handleGetApp)
+	$('#app').on('click', '#delete', handlers.handleAppDelete) 
+	$('#app').on('click', '#edit', handlers.handleGetApp)
 	$('#app').on('click', '.save-update', handlers.handleAppUpdate)
 	$('#app').on('change', '#statusFilter', handlers.handleFilter)
 	$('#app').on('click', '#app-link', handlers.handleAddAppFromApi)
@@ -24,7 +25,5 @@ const attachListeners = () => {
 	$('#app').on('click', '#take-to-login', render.loginForm)
 	$('#app').on('click', '#take-to-register', render.newUserForm)
 	$('#app').on('submit', '#login-form', handlers.handleUserLogin)
-
-
 
 }

@@ -22,15 +22,14 @@ const store = (() => {
 		this.applications = this.applications.map(application => {
 				if (application.id == updatedApp.id) {
 					Object.assign({}, application, updatedApp);
-
 				} else {
 					return application
 				}
 			});
 	}
 
-	let filter = ''
-//
+	let filter = '';
+
 	return {
 		addUserToStore,
 		addAppToStore,

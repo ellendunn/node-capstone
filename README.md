@@ -1,12 +1,17 @@
 # | Trackter |
 ##### Organize your Job Search
-#
+
+Demo the app at https://trackter.herokuapp.com/
+Demo login information:
+  username: demo
+  password: password
+
 ## WHAT IS TRACKTER?
 This app provides individuals who are actively applying for jobs an organizational
 platform to keep track of their applications stay on top of their job hunt.
 
 Users can add details of applications they have submitted, along with connections
-at the company, and keep track its stage in the application process.
+at the company, and keep track of its stage in the application process.
 Users can also search for new jobs from GitHub's Jobs API and automatically
 add any viewed posting to their collection.
 
