@@ -318,11 +318,11 @@ const openings = (jobs, location) => {
 			<div class='app-title col-12'>
 			<h2>There are currently no open positions in "${location}"</h2>
 			</div>
-			<form id='loc-form'>
+			<form id='loc-form' class='col-6'>
 				<fieldset>
 				<legend>Try Searching in a New Location: </legend>
 				<label for='locationSearch'></label>
-				<input value= 'Chicago, IL' name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL'/>
+				<input name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL' required/>
 				</fieldset>
 				<button type='submit' id='loc-search-button'>Search Opportunities</button>
 			</form>
@@ -365,7 +365,7 @@ const locationSearch  = () => {
 			<fieldset>
 			<legend>Enter a location to search:</legend>
 			<label for='locationSearch'></label>
-			<input value= 'Chicago, IL' name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL'/>
+			<input name='locationSearch' id='locationSearch' placeholder = 'Chicago, IL' required/>
 			</fieldset>
 			<button type='submit' id='loc-search-button'>Search Opportunities</button>
 		</form>`)
