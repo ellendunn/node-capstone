@@ -1,6 +1,7 @@
 node_modules
 to-dos.txt
 .env
+.travis.yml
 
 
 app-seed-data.json

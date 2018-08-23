@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: r4T2MatlHVXVpLrqAklLy57h7/S5xg0OBQMnGYCthfJZP4E08lxUbfite1yA0aO79KXH0brGSzzwX859M69OjCkmTGcw+DPxVf16geTEgUut7SKl6PJkzwaVTzI46oFfzDnfRuoK4FAKCeiRNNuTb3zZxrqAKDiQmpm+2FUJLXJ7LPlbTgP2m12exg7RXgdWdzQPXnEYoANf1k8vMRYWNX/dRg36upDwCfGzRHiQxGj50knmaAKa++/XcDPbHfF45vqBQJUjB/OsP3dsXkPcivUMilS+5HPClN18nperaNt9x/Go4c94+y8xAbfVVWpoUNnjkcxI3nAuXEWTlwO6Tu1vjZSCK/CS3WAdBs1nwuDHOTWlVMfJbDksRlCG20IQf4wKSoPmqknG/73+PczvzRUlebKvx4D564Q1wiMJEPPI7O1dkZNhQkYVqmGt37WfIE8/NrU/XqXMjJa+3O6DjkkvVxPSA7eMuAfd7WzJppROT4G5VyYkD2nQoqBsp9IemhuYK/Bn8SBwRzadKX8j6cQlaxE17j2gjXEjPOajRkod+a4hCtyMlsbEkoZthxbzst7QGsYgKJSOHkisZDuD16KmqOuU+R+x8pPVSm3JrSsrt76+fyCBGaGO5w/7uV8uCjOJxwP+mFr8cu68thJd0yUTmyxINUw7807yIwo3Og8=
-  app: powerful-chamber-77664
+  app: trackter
   on:
     repo: ellendunn/node-capstone

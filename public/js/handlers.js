@@ -3,7 +3,7 @@ const handlers= (() => {
 	const handleErrors = message => {
 		swal({
 			title: message,
-			icon: 'warning'
+			// icon: 'warning'
 		})
 	}
 
@@ -29,11 +29,12 @@ const handlers= (() => {
 		let password = $('#password').val();
 		const userCred = JSON.stringify({username, password})
 
+
 		api.getUserJwt(userCred)
 			.then(token => {
 				localStorage.setItem('token', token.authToken);
 				api.getUser(token.authToken);
-				render.navBar()
+				render.navBar();
 				handleGetAllApps()
 			})
 	}
@@ -72,8 +73,8 @@ const handlers= (() => {
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: `New Application Added with the status "${newApplication.status}"!`,
-					icon: 'success'
+					title: `New Application Added"!`,
+					// icon: 'success'
 				})
 				store.addAppToStore(newApplication)
 				render.applications()
@@ -107,7 +108,7 @@ const handlers= (() => {
 			.then((updated) => {
 				swal({
 					title: `Application updated!`,
-					icon: 'success'
+					// icon: 'success'
 				})
 				handleGetAllApps();
 			})
@@ -129,7 +130,7 @@ const handlers= (() => {
 
 		swal({
 			title: 'Are you sure you want to delete this application?',
-			icon: 'warning',
+			// icon: 'warning',
 			buttons: true,
   		dangerMode: true
 		})
@@ -162,6 +163,7 @@ const handlers= (() => {
 		event.preventDefault();
 		const location = $('#locationSearch').val();
 
+
 		api.getNewJobs(location)
 			.then(jobs => {
 					render.openings(jobs, location)
@@ -173,7 +175,8 @@ const handlers= (() => {
 			return array.id === id
 		}
 
-		const viewedJob = jobs.find(isJob)
+		const viewedJob = jobs.find(isJob);
+
 		let role = viewedJob.title;
 		let company = viewedJob.company;
 		let link = viewedJob.url;
@@ -194,7 +197,7 @@ const handlers= (() => {
 			.then(newApplication => {
 				swal({
 					title: `New Application Added with the status "Viewed App"!`,
-					icon: 'success'
+					// icon: 'success'
 				})
 				store.addAppToStore(newApplication)
 			})
@@ -203,9 +206,8 @@ const handlers= (() => {
 	const handleAddAppFromApi = event => {
 		const selected = $(event.currentTarget).closest('.indiv-job');
 		const _id = selected[0].id
-		const location = localStorage.getItem('location')
 
-		api.getNewJobs(location)
+		api.getNewJobs()
 		.then(jobs => {
 			handleJobs(jobs, _id)
 		})

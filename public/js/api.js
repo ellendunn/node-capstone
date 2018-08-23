@@ -44,6 +44,9 @@ const api = (() => {
 			contentType: 'application/json',
 		})
 		.then(res => res)
+		.fail(function(error) {
+			handlers.handleErrors('Invalid Username or Password')
+		})
 
 	const getUser = token =>
 		$.ajax({
@@ -56,6 +59,10 @@ const api = (() => {
 			 }
 		})
 		.then(res => res)
+		.fail(function(error) {
+			let errMsg = error.responseJSON.message;
+			handlers.handleErrors(errMsg)
+		})
 
 	const getAllUsers = () => {
 		return $.getJSON(url + '/users')

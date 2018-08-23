@@ -74,15 +74,15 @@ describe('Applications API resource', function() {
 		return closeServer();
 	})
 
-	// it('it should exist', function() {
-	// 	return chai
-	// 	.request(app)
-	// 	.get('/')
-	// 	.set('Authorization', `Bearer ${jwt}`)
-	// 	.then(function(res) {
-	// 		expect(res).to.have.status(200);
-	// 	});
-	// });
+	it('it should exist', function() {
+		return chai
+		.request(app)
+		.get('/')
+		.set('Authorization', `Bearer ${jwt}`)
+		.then(function(res) {
+			expect(res).to.have.status(200);
+		});
+	});
 
 	describe('GET applications endpoint', function() {
 
