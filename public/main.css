@@ -1,5 +1,7 @@
 * {
-	font-family: 'Roboto', sans-serif;
+	/* font-family: 'Roboto', sans-serif; */
+	font-family: 'Montserrat', sans-serif;
+
 	margin: 0px;
 }
 
@@ -9,6 +11,8 @@ body {
 	margin-right: auto;
 	width: 100%;
 	background: url('http://thepatternlibrary.com/img/u.png') repeat;
+	color: #212121;
+
 }
 
 .container {
@@ -25,11 +29,17 @@ body {
 
 }
 .container h1 {
-	font-size: 44px;
+	font-size: 50px;
 	padding-bottom: 20px;
 	padding-top: 10px;
 	padding-right: 10px;
+	font-family: 'Playfair Display', serif;
+
 }
+.container p {
+	font-size: 22px;
+}
+
 .container h1, .container p {
 	display: inline-block;
 	/* border: 1px black solid; */
@@ -106,7 +116,7 @@ button[type='submit'], button[type='button'] {
   transition-duration: 0.2s;
 	cursor: pointer;
 	font-size: 14px;
-	border-radius: 3px;
+	border-radius: 5px;
 }
 
 button:hover {
@@ -120,7 +130,8 @@ button:hover {
 	height: 30px;
 	width: 200px;
 	margin-bottom: 0px;
-	font-size: 12px
+	font-size: 16px;
+	background: white;
 }
 
 #edit, #delete {
@@ -301,7 +312,8 @@ h2, h3, p, a, span {
 	border-radius: 7px;
 	top: 0;
 	left: 0;
-	height: 300px;
+	height: 280px;
+	padding-top: 20px
 }
 
 .back {
@@ -342,7 +354,7 @@ h2, h3, p, a, span {
 	background-color: #80cbc4
 }
 .interview {
-	background-color: #ffa000
+	background-color: #ff8f00
 }
 .follow-up {
 	background-color: #00897b
@@ -412,10 +424,19 @@ and (max-device-width : 768px) {
 }
 
 .indiv-app {
+	/* border: 1px black solid; */
 	font-size: 16px;
 	text-align: center;
-	height: auto;
-	padding: 20px;
+	height: 300px;
+	padding: 0px;
+}
+
+.front, .back {
+	height: 300px;
+}
+
+.back{
+	font-size: 18px;
 }
 
 #contact-info {
@@ -456,7 +477,7 @@ and (max-device-width : 768px) {
 /* Styles */
 
 .col-4{
-	width: 43%;
+	width: 44%;
 	}
 
 .col-6, .col-9{
@@ -470,8 +491,15 @@ and (max-device-width : 768px) {
 
 .indiv-app {
 	text-align: center;
+	/* border: 1px black solid; */
 	height: 300px;
-	padding: 20px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.front, .back {
+	margin: 0px;
+	/* padding: 10px; */
 }
 
 #contact-info {

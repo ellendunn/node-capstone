@@ -280,7 +280,7 @@ const render =(() => {
 											<a href='${apps.link}' target='_blank'>Link to Application</a>
 											<div id='contact-info'>
 											<h3>Point of Contact:</h3>
-											<p>Name: ${contactObj[0]} Title: ${contactObj[1]} </p>
+											<p>Name: ${contactObj[0]} - Title: ${contactObj[1]} </p>
 											<p>Email: ${contactObj[2]}</p>
 											<p>Phone: ${contactObj[3]} </p>
 											</div>
