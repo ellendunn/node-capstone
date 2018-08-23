@@ -13,7 +13,7 @@ const expect = chai.expect;
 describe('Applications API resource', function() {
   this.timeout(10000);
   before(function () {
-      return runServer(TEST_DATABASE_URL);
+      return runServer(TEST_DATABASE_URL, 8080);
   });
 
   beforeEach(function () {});
