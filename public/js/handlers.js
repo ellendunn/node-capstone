@@ -161,8 +161,10 @@ const handlers= (() => {
 
 	const handleJobsApi = event => {
 		event.preventDefault();
-		const location = $('#locationSearch').val();
+		localStorage.removeItem('location');
 
+		const location = $('#locationSearch').val();
+		localStorage.setItem('location', location);
 
 		api.getNewJobs(location)
 			.then(jobs => {
@@ -175,8 +177,10 @@ const handlers= (() => {
 			return array.id === id
 		}
 
-		const viewedJob = jobs.find(isJob);
+		console.log(jobs)
 
+		const viewedJob = jobs.find(isJob);
+		console.log(viewedJob)
 		let role = viewedJob.title;
 		let company = viewedJob.company;
 		let link = viewedJob.url;
@@ -206,8 +210,10 @@ const handlers= (() => {
 	const handleAddAppFromApi = event => {
 		const selected = $(event.currentTarget).closest('.indiv-job');
 		const _id = selected[0].id
+		const location = localStorage.getItem('location');
 
-		api.getNewJobs()
+
+		api.getNewJobs(location)
 		.then(jobs => {
 			handleJobs(jobs, _id)
 		})

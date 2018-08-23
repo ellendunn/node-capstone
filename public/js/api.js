@@ -10,7 +10,6 @@ const api = (() => {
 			url: JOBS_SEARCH_URL + 'positions.json',
 			data: {
 				location: query,
-				per_page: 10,
 			},
 			dataType: 'jsonp',
 			contentType: 'application/json',

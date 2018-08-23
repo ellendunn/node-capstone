@@ -242,7 +242,9 @@ h3 {
 }
 
 p, a, span {
-	padding: 5px
+	padding: 5px;
+	margin-left: 10px;
+	margin-right: 10px
 }
 
 
@@ -267,6 +269,7 @@ p, a, span {
 }
 
 .indiv-app:hover .flipper,
+.indiv-app:active .flipper,
 .indiv-app.hover .flipper {
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
