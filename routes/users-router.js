@@ -7,7 +7,4 @@ const controllers = require('../controllers/users')
 router.post('/', controllers.postUser);
 router.get('/:id', controllers.getUser);
 
-// will need to remove
-router.get('/', controllers.getAllUsers);
-
 module.exports = { router }

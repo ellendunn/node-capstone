@@ -10,14 +10,24 @@ const handlers= (() => {
 //USER & AUTH HANDLERS
 	const handleSubmitNewUser = event => {
 		event.preventDefault();
-		let firstName = $('#firstName').val();
-		let lastName = $('#lastName').val();
-		let username = $('#username').val();
-		let password = $('#password').val();
-		const newUser = JSON.stringify({firstName, lastName, username, password})
+		const userData = $( event.currentTarget ).serializeArray();
+
+			const data = userData.reduce((obj, input) => {
+				obj[input.name] = input.value
+				return obj
+			}, {})
+
+		console.log(data)
+
+		// let firstName = $('#firstName').val();
+		// let lastName = $('#lastName').val();
+		// let username = $('#username').val();
+		// let password = $('#password').val();
+		const newUser = JSON.stringify(data)
 
 		api.postUser(newUser)
 			.then(user => {
+				console.log(user)
 				store.addUserToStore(user);
 				render.loginForm()
 			})
@@ -33,7 +43,7 @@ const handlers= (() => {
 		api.getUserJwt(userCred)
 			.then(token => {
 				localStorage.setItem('token', token.authToken);
-				api.getUser(token.authToken);
+				// api.getUser(token.authToken);
 				render.navBar();
 				handleGetAllApps()
 			})
@@ -46,29 +56,31 @@ const handlers= (() => {
 		$('.container').html(`<h1>[ Trackter ] </h1>
 		<p> Organize Your Job Search<p>`)
 		render.loginForm();
-		}
+	}
 
 
 //APPLICATION HANDLERS
+	const extractData = appData => {
+		const data = appData.reduce((obj, input) => {
+			obj[input.name] = input.value
+			return obj
+		}, {})
+		data.contact = {};
+		['name', 'title', 'email', 'phone'].forEach(field => {
+			data.contact[field] = data[field]
+			delete data[field]
+		})
+		return data
+	}
+
 	const handleAppSubmit = event => {
 		event.preventDefault();
+		const appData = $( event.currentTarget ).serializeArray();
+		const extractedData = extractData(appData)
+		console.log(extractedData)
 
-		let name = $('#name').val();
-		let title = $('#title').val();
-		let email = $('#email').val();
-		let phone = $('#phone').val();
 
-		let role = $('#role').val();
-		let company = $('#company').val();
-		let link = $('#link').val();
-		let status = $('#status').val();
-		let contacts = {name, title, email, phone};
-		let notes = $('#notes').val();
-		let created = $('#date').val();
-
-		const newApp = JSON.stringify({
-			role, company, link, status, contacts, notes, created
-		});
+		const newApp = JSON.stringify(extractedData);
 
 		api.postApp(newApp)
 			.then(newApplication => {
@@ -77,31 +89,36 @@ const handlers= (() => {
 					// icon: 'success'
 				})
 				store.addAppToStore(newApplication)
+				console.log(newApplication)
 				render.applications()
 			})
 	}
 
 	const handleAppUpdate = event => {
 		event.preventDefault();
-		const id = $(event.currentTarget).closest('#update-app').data().id;
+		const $target = $(event.currentTarget);
+		const id = $target.closest('#update-app').data().id;
 
-		let name = $('#name').val();
-		let title = $('#title').val();
-		let email = $('#email').val();
-		let phone = $('#phone').val();
+		const appData = $target.serializeArray();
+		const extractedData = extractData(appData)
+		extractedData.id = id
 
-		let role = $('#role').val();
-		let company = $('#company').val();
-		let link = $('#link').val();
-		let status = $('#status').val();
 
-		let contacts = {name, title, email, phone};
-		let notes = $('#notes').val();
-		let created = $('#date').val();
+		// let name = $('#name').val();
+		// let title = $('#title').val();
+		// let email = $('#email').val();
+		// let phone = $('#phone').val();
+		//
+		// let role = $('#role').val();
+		// let company = $('#company').val();
+		// let link = $('#link').val();
+		// let status = $('#status').val();
+		//
+		// let contacts = {name, title, email, phone};
+		// let notes = $('#notes').val();
+		// let created = $('#date').val();
 
-		const updatedApp = JSON.stringify({
-			id, role, company, link, status, contacts, notes, created
-		})
+		const updatedApp = JSON.stringify(extractedData)
 
 		api.updateApp(id, updatedApp)
 

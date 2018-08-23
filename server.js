@@ -42,13 +42,6 @@ app.use('/applications', jwtAuth, appRouter);
 app.use('/users', usersRouter);//now do I need to add /api before endpoints?
 app.use('/auth', authRouter);
 
-//given the JWT, user access /protected endpoint to get their data
-app.get('/protected', jwtAuth, (req,res) => {
-	return res.json({
-		data: 'applications are available'
-	})
-});
-
 app.use('*', function(req,res) {
 	res.status(404).json({message: 'Not Found'});
 })

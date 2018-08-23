@@ -47,22 +47,6 @@ const api = (() => {
 			handlers.handleErrors('Invalid Username or Password')
 		})
 
-	const getUser = token =>
-		$.ajax({
-			type: 'GET',
-			url: url + '/protected',
-			dataType: 'json',
-			contentType: 'application/json',
-			headers: {
-				Authorization: `Bearer ${token}`
-			 }
-		})
-		.then(res => res)
-		.fail(function(error) {
-			let errMsg = error.responseJSON.message;
-			handlers.handleErrors(errMsg)
-		})
-
 	const getAllUsers = () => {
 		return $.getJSON(url + '/users')
 		.then(res => res)
@@ -146,10 +130,10 @@ const api = (() => {
 		.then(res =>  res)
 	}
 
-	return{
+	return {
 		postUser,
 		getUserJwt,
-		getUser,
+		// getUser,
 		getAllUsers,
 		postApp,
 		getAllApps,
@@ -157,6 +141,6 @@ const api = (() => {
 		getApp,
 		updateApp,
 		getNewJobs
-		}
+	}
 
 })()

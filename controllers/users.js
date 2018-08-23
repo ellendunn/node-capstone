@@ -65,7 +65,6 @@ exports.postUser = (req, res) => {
 	);
 
 	if (tooShortField || tooLongField) {
-		console.log('here')
 		return res.status(422).json({
 			code: 422,
 			reason: 'ValidationError',
@@ -98,7 +97,6 @@ exports.postUser = (req, res) => {
 			return User.create({
 				firstName,
 				lastName,
-				location,
 				username,
 				password: hash
 			});
@@ -126,19 +124,4 @@ exports.getUser = (req, res) => {
 			console.error(err);
 			res.status(500).json({message: 'Internal server error 1'})
 		});
-}
-
-exports.getAllUsers = (req, res) => {
-  User
-    .find()
-    .then(users => {
-      res.json({
-        users: users.map(
-          (user) => user.serialize())
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({message: 'Internal server error 2'})
-    })
 }

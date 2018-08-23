@@ -11,25 +11,3 @@ const { User } = require('../models/user')
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-
-describe('Applications API resource', function() {
-	this.timeout(10000);
-
-	before(function(){
-		return runServer(TEST_DATABASE_URL, 8082);
-	});
-
-	after(function(){
-		return closeServer();
-	})
-
-	it('it should exist', function() {
-		return chai
-		.request(app)
-		.get('/')
-		.then(function(res) {
-			expect(res).to.have.status(200);
-		});
-	})
-
-})

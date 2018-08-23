@@ -83,8 +83,8 @@ const render =(() => {
 				<label for='notes'>Notes: </label><br>
 				<textarea id='notes' name='notes' rows='10' cols='30' placeholder='Need to follow up!'></textarea>
 				<br>
-				<input for='date' type='hidden' name='date' id='date' />
-					<script type='text/javascript'> document.getElementById('date').value=Date();
+				<input for='created' type='hidden' name='created' id='created' />
+					<script type='text/javascript'> document.getElementById('created').value=Date();
 					</script>
 			</fieldset>
 			<button type='submit'>Add Application</button>
@@ -151,9 +151,7 @@ const render =(() => {
 					<label for='notes'>Notes: </label><br>
 					<textarea value='${application.notes}' id='notes' name='notes' rows='10' cols='30'></textarea>
 					<br>
-					<input for='date' type='hidden' name='date' id='date' />
-						<script type='text/javascript'> document.getElementById('date').value=Date();
-						</script>
+					<input for='created' type='hidden' name='created' id='created' value = ${application.created}/>
 				</fieldset>
 				<button class='save-update' type='button'>Update Application</button>
 			</form>`
@@ -216,7 +214,6 @@ const render =(() => {
 			</div><br>` +
 
 			applications.map(apps => {
-
 			const created = apps.created
 			const date = created.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$2-$3-$1')
 			const statusObj = {
