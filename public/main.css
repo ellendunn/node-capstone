@@ -173,8 +173,11 @@ legend {
 }
 
 #update-app, #add-app {
-	padding: 50px;
-	margin-top: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-top: 30px;
 	margin-bottom: 40px;
 	margin-left: auto;
 	margin-right: auto;
@@ -258,7 +261,6 @@ p, a, span {
 	vertical-align: top;
 	font-size: 14px;
 	border-radius: 7px;
-
 }
 
 .indiv-app{
@@ -266,7 +268,6 @@ p, a, span {
   -moz-perspective: 1000;
   -o-perspective: 1000;
   perspective: 1000;
-
 }
 
 .indiv-app:hover .flipper,
@@ -468,6 +469,15 @@ and (max-device-width : 768px) {
 	padding-left: 60px;
 }
 
+button[type='submit'], button[type='button'] {
+	text-align: center;
+	padding: 10px;
+	width: auto;
+	margin-bottom: 10px;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
 }
 
 /* iPads (landscape) ----------- */
@@ -487,6 +497,15 @@ and (max-device-width : 768px) {
 }
 .col-12 {
 	width: 90%
+}
+
+button[type='submit'], button[type='button'] {
+	text-align: center;
+	padding: 10px;
+	width: auto;
+	margin-bottom: 10px;
+	font-size: 14px;
+	border-radius: 5px;
 }
 
 }
@@ -529,6 +548,15 @@ and (max-device-width : 768px) {
 	padding: 10px;
 	text-align: left;
 	padding-left: 60px;
+}
+
+button[type='submit'], button[type='button'] {
+	text-align: center;
+	padding: 10px;
+	width: auto;
+	margin-bottom: 10px;
+	font-size: 14px;
+	border-radius: 5px;
 }
 
 }
