@@ -24,7 +24,7 @@ const render =(() => {
 
 	const loginForm = () => {
 		$('#app').html(
-			`<h2>Organize your job applications so you get every opportunity to advance your career.</h2>
+			`<h2>Organize your job applications so you seize every opportunity to advance your career.</h2>
 			<h3 class='landing'> Track your applications | Store networking contacts | Search for new opportunities </h3>
 			<br>
 			<div class = 'user-auth col-6'>
