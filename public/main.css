@@ -18,7 +18,7 @@ body {
 	width: 100%;
 	display: inline-block;
 	padding-bottom: 20px;
-	padding-left: 30px;
+	padding-left: 20px;
 	padding-right: 30px;
 	background: #00796b;
 	color: white;
@@ -40,7 +40,6 @@ body {
 
 .container h1, .container p {
 	display: inline-block;
-	/* border: 1px black solid; */
 	vertical-align: baseline;
 }
 
@@ -53,7 +52,7 @@ body {
 
 #logout{
 	float: right;
-	margin-right: 100px;
+	margin-right: 50px;
 }
 
 #app {
@@ -239,6 +238,17 @@ h1{
 h2 {
 	font-size: 28px;
 	padding: 5px;
+	margin-left:auto;
+	margin-right: auto;
+	max-width: 650px
+}
+
+.landing {
+	/* font-size: 28px; */
+	padding: 5px;
+	margin-left:auto;
+	margin-right: auto;
+	/* max-width: 600px */
 }
 
 h3 {

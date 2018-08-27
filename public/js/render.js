@@ -24,7 +24,10 @@ const render =(() => {
 
 	const loginForm = () => {
 		$('#app').html(
-			`<div class = 'user-auth col-6'>
+			`<h2>Organize your job applications so you get every opportunity to advance your career.</h2>
+			<h3 class='landing'> Track your applications | Store networking contacts | Search for new opportunities </h3>
+			<br>
+			<div class = 'user-auth col-6'>
 				<form id='login-form' method='get' >
 					<fieldset>
 						<legend>Log In to View Your Applications</legend>
@@ -36,6 +39,8 @@ const render =(() => {
 					<button type='submit'>Sign In</button><br>
 					<button type='button' id='take-to-register'>Create Account</button>
 				</form>
+				<p>Demo Login:</p>
+				<p>username - demo, password - password </p>
 			</div>`
 		)
 	}
