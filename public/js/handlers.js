@@ -85,41 +85,16 @@ const handlers= (() => {
 	}
 
 	const handleAppUpdate = event => {
-		// event.preventDefault();
-		// const $target = $(event.currentTarget);
-		// console.log($target)
-		// const id = $target.closest('#update-app').data().id;
-
-		// const appData = $target.serializeArray();
-		// console.log(appData)
-		// const extractedData = extractData(appData)
-	
-
-		// const updatedApp = JSON.stringify(extractedData)
-
-		// console.log(updatedApp)
-
 		event.preventDefault();
-		const id = $(event.currentTarget).closest('#update-app').data().id;
+		const $target = $(event.currentTarget);
+		const id = $target.closest('#update-app').data().id;
 
-		let name = $('#name').val();
-		let title = $('#title').val();
-		let email = $('#email').val();
-		let phone = $('#phone').val();
+		const appData = $target.closest('form').serializeArray();
+		const extractedData = extractData(appData)
+		extractedData.id = id;
 
-		let role = $('#role').val();
-		let company = $('#company').val();
-		let link = $('#link').val();
-		let status = $('#status').val();
+		const updatedApp = JSON.stringify(extractedData)
 
-		let contacts = {name, title, email, phone};
-		let notes = $('#notes').val();
-		let created = $('#date').val();
-
-		const updatedApp = JSON.stringify({
-			id, role, company, link, status, contacts, notes, created
-		})
-		
 		api.updateApp(id, updatedApp)
 
 			.then((updated) => {
