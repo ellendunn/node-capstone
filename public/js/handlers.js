@@ -76,7 +76,7 @@ const handlers= (() => {
 		api.postApp(newApp)
 			.then(newApplication => {
 				swal({
-					title: `New Application Added"!`
+					title: `New Application Added!`
 				})
 				store.addAppToStore(newApplication)
 				console.log(newApplication)
