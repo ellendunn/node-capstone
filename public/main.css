@@ -10,7 +10,6 @@ body {
 	width: 100%;
 	background: url('http://thepatternlibrary.com/img/u.png') repeat;
 	color: #263238;
-
 }
 
 .container {
@@ -23,17 +22,16 @@ body {
 	background: #00796b;
 	color: white;
 	z-index: 3;
-
-
 }
+
 .container h1 {
 	font-size: 50px;
 	padding-bottom: 20px;
 	padding-top: 15px;
 	padding-right: 10px;
 	font-family: 'Playfair Display', serif;
-
 }
+
 .container p {
 	font-size: 22px;
 }
